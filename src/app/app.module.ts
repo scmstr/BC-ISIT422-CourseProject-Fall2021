@@ -9,6 +9,7 @@ import { HeroesComponent } from './heroes/heroes.component';
 import { MessagesComponent } from './messages/messages.component';
 
 import { AppRoutingModule } from './app-routing.module';
+import { GameReminderComponent } from './game-reminder/game-reminder.component';
 
 @NgModule({
   imports: [
@@ -21,7 +22,8 @@ import { AppRoutingModule } from './app-routing.module';
     DashboardComponent,
     HeroesComponent,
     HeroDetailComponent,
-    MessagesComponent
+    MessagesComponent,
+    GameReminderComponent
   ],
   bootstrap: [ AppComponent ]
 })
