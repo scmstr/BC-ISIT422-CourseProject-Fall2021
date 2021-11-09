@@ -10,6 +10,7 @@ import { MessagesComponent } from './messages/messages.component';
 
 import { AppRoutingModule } from './app-routing.module';
 import { GameReminderComponent } from './game-reminder/game-reminder.component';
+import { UserProfileComponent } from './user-profile/user-profile.component';
 
 @NgModule({
   imports: [
@@ -23,7 +24,8 @@ import { GameReminderComponent } from './game-reminder/game-reminder.component';
     HeroesComponent,
     HeroDetailComponent,
     MessagesComponent,
-    GameReminderComponent
+    GameReminderComponent,
+    UserProfileComponent
   ],
   bootstrap: [ AppComponent ]
 })
