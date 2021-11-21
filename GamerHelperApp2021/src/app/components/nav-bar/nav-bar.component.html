@@ -1,0 +1,11 @@
+<p>nav-bar works!</p>
+<nav *ngIf="loginService.loggedIn">
+    <a routerLink="/home">Home</a>
+    <a routerLink="/myGames">My Games</a>
+    <a routerLink="/search">Search</a>
+    <a (click)='Logout()'>Log Out</a>
+</nav>
+
+<nav *ngIf="!loginService.loggedIn">
+    <a routerLink="/login">Go to Login Screen</a>
+</nav>
