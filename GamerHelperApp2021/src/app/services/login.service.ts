@@ -16,7 +16,7 @@ export class LoginService {
 
 
   //id?:number;
-  id: number = 2;  ///this is a fake.
+  id: number = 1;  ///this is a fake.
   loggedIn?:boolean;
 
   CheckLogin() {

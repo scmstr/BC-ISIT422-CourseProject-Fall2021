@@ -24,6 +24,9 @@ import { User } from 'src/app/objectClasses/user';
 export class MyGamesPageComponent implements OnInit {
 
   myGames: Game[] = [];
+  myGames1 = [];
+  gameID?: String;
+  gameDateTime?: string;
 
   constructor(
     public loginService:LoginService,
@@ -46,7 +49,12 @@ export class MyGamesPageComponent implements OnInit {
   getMyGames(): void {
     this.userService.GetMyGames(this.loginService.GetMyUID()) //this should be returning an observable<Game[]>
     .subscribe(myGames => this.myGames = myGames); //subscribe means "keep going with the code, but on the side, make a thing that waits until the previous stuff finishes, then do this stuff in parenthesis asyncronously"
+    
+
+
+    console.log("getmygames internal log");
     console.log(this.myGames);
+    console.log("getmygames internal data above");
   } // create this^          by reading ^ from the service
     //kinda like saying "if/when this observable completes, do this stuff"
 

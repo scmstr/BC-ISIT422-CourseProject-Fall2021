@@ -23,17 +23,22 @@ export class UsersService {
     public http: HttpClient,
     public notifications: NotificationsService,
     public loginService: LoginService,
-  ) {
-    
-  }
+  ) { }
 
 
   //gets all games for a single user
-  GetMyGames(UID:number): Observable<Game[]>  {
+  GetMyGames(userID:number): Observable<Game[]>  {
     console.log("getmygames service ran");
-    return this.http.get<Game[]>('http://localhost:3000/myGames/' + UID);
-    //return this.http.get<User>('OTHER ADDRESS/myGames');
+    return this.http.get<Game[]>('http://localhost:3000/myGames/' + userID);
+    //return this.http.get<User>('OTHER ADDRESS/myGames' + userID);
   }
+
+
+
+
+
+
+
 
 
 
