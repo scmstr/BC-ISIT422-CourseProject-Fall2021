@@ -1,26 +1,10 @@
 <p>my-games-page works!</p>
 
 <ul class="game">
-    <li *ngFor="let game of myGames;">
-        <table class="game" [(ngModel)]="game.gameID">{{game.gameID}}</table>
+    <li *ngFor="let item of myGames2;">
+        <span>Game ID: {{item}}</span>
     </li>
 </ul>
 
 
-
-<!-- 
-<form id="bigForm">
-    <table>
-      <tr class='row'>
-          <th class='col'>Name</th>
-          <th class='col'>Job</th>
-      </tr>
-      <tr class='row' *ngFor="let person of model; let i = index" (click)="selectPerson(person)" >
-        <td class='col'>
-          <input [id]="'person.name' + i" [(ngModel)]="person.name" [name]="'person.name' + i"/>
-          - {{person.name}}
-        </td>
-        <td class='col'>{{person.job}}</td>
-      </tr>
-    </table>
-  </form> -->
+ 
