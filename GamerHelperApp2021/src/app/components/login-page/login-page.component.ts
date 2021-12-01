@@ -31,6 +31,17 @@ export class LoginPageComponent implements OnInit {
   LogIn(): void {
     this.loginService.loggedIn = true;
     this.router.navigate(['/home']);
+
+    //get user input from html boxes
+
+    //run testauth method
+      //create object with inputData
+      //runs TestAuth(inputData) through login service
+
+    //if true, navigate home
+
+    //if false, error!
+
   }
 
 

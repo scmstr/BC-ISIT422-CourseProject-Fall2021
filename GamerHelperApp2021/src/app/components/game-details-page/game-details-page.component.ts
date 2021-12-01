@@ -24,4 +24,15 @@ export class GameDetailsPageComponent implements OnInit {
     this.loginService.CheckLogin();
   }
 
+
+  //show all notes for this game upon first loading page
+
+  //method that saves game to list -and enables NewNote button 
+
+  //method that removes game from list -and disables NewNote button 
+
+
+
+
+
 }

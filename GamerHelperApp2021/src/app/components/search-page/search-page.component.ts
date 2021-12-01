@@ -11,7 +11,10 @@ import { LoginService } from 'src/app/services/login.service';
   templateUrl: './search-page.component.html',
   styleUrls: ['./search-page.component.css']
 })
+
 export class SearchPageComponent implements OnInit {
+
+
 
   constructor(
     public loginService:LoginService,
@@ -23,5 +26,20 @@ export class SearchPageComponent implements OnInit {
   ngOnInit(): void {
     this.loginService.CheckLogin();
   }
+
+  searched?:boolean = false;
+
+  Search() {
+    this.searched = true;
+  }
+
+
+
+
+
+
+
+
+
 
 }

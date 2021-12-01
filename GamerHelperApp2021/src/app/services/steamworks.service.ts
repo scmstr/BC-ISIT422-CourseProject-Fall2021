@@ -1,5 +1,3 @@
-
-//imports, general
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { HttpClient, HttpClientModule, HttpHeaders } from '@angular/common/http'; //lets you use HTTP services! IMPORTANT FOR USING NON-LOCAL DATA
@@ -15,9 +13,7 @@ import { LoginService } from './login.service';
 @Injectable({
   providedIn: 'root'
 })
-
-
-export class UsersService {
+export class SteamworksService {
 
   constructor(
     public http: HttpClient,
@@ -25,24 +21,9 @@ export class UsersService {
     public loginService: LoginService,
   ) { }
 
-  //make sure to change http addresses to https for azure!!!!! (not .http. classes!) IN ALL ANGULAR ADDRESSES!!!! not just here in users.service!
-  //azure requires https!
-  //other libraries/external addresses need to be https, too (bootstrap, whatever)
 
 
 
-  //gets all games for a single user
-  GetMyGames(userID:number): Observable<Game[]>  {
-    console.log("getmygames service ran");
-    return this.http.get<Game[]>('http://localhost:3000/myGames/' + userID);
-    //return this.http.get<User>('OTHER ADDRESS/myGames' + userID);
-  }
-
-
-  //add new game to a user's list
-
-
-  //
 
 
 
@@ -54,5 +35,3 @@ export class UsersService {
 
 
 }
-
-

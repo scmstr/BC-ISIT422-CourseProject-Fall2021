@@ -1,10 +1,17 @@
 <p>my-games-page works!</p>
 
-<ul class="game">
-    <li *ngFor="let item of myGames2;">
-        <span>Game ID: {{item}}</span>
-    </li>
-</ul>
+<div>
+    <ul class="Game">
+        <li *ngFor="let aGame of myGamesClassArray;"> <!-- myGames2 to get just gameIDs-->
+            <div class="card align-items-center" style="width: 18rem;">
+                <button class="btn btn-link" routerLink="/game/:{{aGame.gameID}}">Game ID: {{aGame.gameID}}</button>
+                <br />
+                <button class="btn btn-success"  style="width: 13rem;" routerLink="/noteDetails">add note</button>
+            </div>
+            <br />
+        </li>
+    </ul>
+</div>
 
 
  
