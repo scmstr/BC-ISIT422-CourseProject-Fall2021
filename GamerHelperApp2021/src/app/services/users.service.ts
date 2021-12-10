@@ -12,6 +12,11 @@ import { Game } from '../objectClasses/game';
 import { LoginService } from './login.service';
 
 
+
+class X{
+  message: string | undefined;
+}
+
 @Injectable({
   providedIn: 'root'
 })
@@ -40,10 +45,17 @@ export class UsersService {
 
 
   //add new game to a user's list
-
+addGame(userID: number, gameID:number){
+  console.log("add game service ran");
+  return this.http.put<Game>('http://localhost:3000/myGames/' + userID , gameID)
+}
 
   //
-
+//delete a game from user's list
+deleteGame(userID: number): Observable<X>{
+  console.log("delete game service ran");
+  return this.http.delete<X>('http://localhost:3000/myGames/' + userID);
+}
 
  
 
