@@ -8,6 +8,8 @@ import { Observable, of } from 'rxjs';
 import { LoginService } from 'src/app/services/login.service';
 import { AppRoutingModule } from 'src/app/app-routing.module';
 import { Router } from '@angular/router';
+import { IGDBAPIService } from 'src/app/services/igdbapi.service';
+import { GameDetails } from 'src/app/objectClasses/game-details';
 
 @Component({
   selector: 'app-home-page',
@@ -21,15 +23,52 @@ export class HomePageComponent implements OnInit {
     private location: Location,
     private route: ActivatedRoute,
     private router: Router,
-  ) {this.loginService.CheckLogin();}
+    public igdb: IGDBAPIService,
+    ) 
+    {
+      if (!this.loginService.IsLoggedIn()) 
+      {
+        loginService.Logout(); //checks for auth, auto-logout if not auth
+      }
+  }    
+  
 
-  
-  
-  
+  showMe:boolean = false;
+  ChangeShowMe() {
+    !this.showMe
+    console.log("showme ran");
+  }
+
+
+
+
+  aGame: GameDetails = {} as GameDetails;
 
   ngOnInit(): void {
-    this.loginService.CheckLogin();
+    if (!this.loginService.IsLoggedIn())
+    {
+      this.loginService.Logout();
+
+    }  
+
+    
+    this.igdb.GetGameByID(231)
+    .subscribe (returnData => {
+      this.aGame = new GameDetails(returnData[0].id, returnData[0].first_release_date, returnData[0].name, returnData[0].rating, returnData[0].summary, returnData[0].url);
+    })
+    
+
   }
+
+
+
+
+
+
+  
+
+
+  
 
 
 

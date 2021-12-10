@@ -21,12 +21,23 @@ export class SearchPageComponent implements OnInit {
     private location: Location,
     private route: ActivatedRoute,
     private router: Router,
-  ) {this.loginService.CheckLogin();}
+    )
+  {
+    if (!this.loginService.IsLoggedIn()) 
+      {
+        loginService.Logout(); //checks for auth, auto-logout if not auth
+      }
+  }    
+
 
   ngOnInit(): void {
-    this.loginService.CheckLogin();
+    if (!this.loginService.IsLoggedIn())
+      {
+        this.loginService.Logout();
+      }
   }
 
+  
   searched?:boolean = false;
 
   Search() {

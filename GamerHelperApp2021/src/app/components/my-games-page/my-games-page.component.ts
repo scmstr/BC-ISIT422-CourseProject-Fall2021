@@ -41,18 +41,32 @@ export class MyGamesPageComponent implements OnInit {
     private router: Router,
     public userService: UsersService,
     public IGDBService: IGDBAPIService,
-  ) {this.loginService.CheckLogin();} //checks for auth, auto-logout if not auth
-
-
-
+  ) 
+  {
+    if (!this.loginService.IsLoggedIn()) 
+    {
+      loginService.Logout(); //checks for auth, auto-logout if not auth
+    }
+  }    
 
 
   ngOnInit(): void {
-    this.loginService.CheckLogin();  //checks for auth, auto-logout if not auth
-    this.getMyGames();
+    if (!this.loginService.IsLoggedIn())
+      {
+        this.loginService.Logout();
+      }
+    else
+    {
+      this.getMyGames();
+    }
+      
+
   }
 
 
+
+
+  //this method's messiness is an artifact. It's currently functional, but can be RADICALLY cleaned up by looking at home-page-component.ts and the GetGameByID() method at/near bottom.
   getMyGames(): void {
     this.userService.GetMyGames(this.loginService.GetMyUID()) //this should be returning an observable<Game[]>
     .subscribe(myGames => {
@@ -68,47 +82,9 @@ export class MyGamesPageComponent implements OnInit {
         this.myGamesClassArray.push(new Game(this.myGames1[i][0], this.myGames1[i][1], this.myGames1[i][2]));
       }
 
-      console.log(this.myGamesClassArray);
-
-      //gets the names of games
-      for (let i = 0; i < this.myGamesClassArray.length; i++) {
-        
-        let tempArray: any[] = [];
-
-        // this.IGDBService.GetGameDetails(this.myGamesClassArray[i].gameID)
-        // .subscribe(tempArray => {
-        //   this.myGameDetailsArray = tempArray;
-        //   console.log("this is tempArray:");
-        //   console.log(tempArray);
 
 
-
-
-
-        // })
-
-
-        // this.myGameDetailsArray.push(new GameDetails(
-          
-        //   this.IGDBService.GetGameDetails(231).subscribe(
-            
-
-        //   )
-        //   ));    //this.IGDBService.GetGameDetails(231)
-
-
-
-
-      }
-
-    }); //subscribe means "keep going with the code, but on the side, make a thing that waits until the previous stuff finishes, then do this stuff in parenthesis asyncronously"
-
-
-
-
-    console.log("getmygames internal log");
-    console.log(this.myGamesArray);
-    console.log("getmygames internal data above");
+    });
   }
 
 

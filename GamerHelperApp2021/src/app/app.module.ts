@@ -42,6 +42,7 @@ import { NoteDetailsPageComponent } from './components/note-details-page/note-de
   imports: [
     BrowserModule,
     AppRoutingModule,
+    FormsModule,
     HttpClientModule
   ],
   providers: [

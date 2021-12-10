@@ -18,11 +18,22 @@ export class GameDetailsPageComponent implements OnInit {
     private location: Location,
     private route: ActivatedRoute,
     private router: Router,
-  ) {this.loginService.CheckLogin();}
+  ) 
+  {
+    if (!this.loginService.IsLoggedIn()) 
+    {
+      loginService.Logout(); //checks for auth, auto-logout if not auth
+    }
+  }    
+
 
   ngOnInit(): void {
-    this.loginService.CheckLogin();
+    if (!this.loginService.IsLoggedIn())
+      {
+        this.loginService.Logout();
+      }
   }
+
 
 
   //show all notes for this game upon first loading page
@@ -31,7 +42,7 @@ export class GameDetailsPageComponent implements OnInit {
 
   //method that removes game from list -and disables NewNote button 
 
-
+  //GetGameDetailsByID
 
 
 

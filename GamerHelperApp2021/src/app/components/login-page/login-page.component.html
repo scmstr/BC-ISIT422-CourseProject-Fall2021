@@ -5,12 +5,12 @@ wowow
 <br/>
 login here!
 <br/><br/>
-<label>username</label><input>
+<label>username: </label><input type="username" id="username" name="username" [(ngModel)]="usernameInput">
 <br />
-<label>password</label><input>
+<label>password: </label><input  type="password" id="password" name="password" [(ngModel)]="passwordInput">
 
 
 <br/><br/>
 <button (click)=LogIn()>Login!</button>
 <br/><br/>
-<button>Register!</button>
+<button routerLink="/newAccount">Register!</button>

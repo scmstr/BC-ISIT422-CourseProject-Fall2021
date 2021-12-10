@@ -30,6 +30,7 @@ const routes: Routes = [
   { path: 'noteDetails', component: NoteDetailsPageComponent },
   { path: 'search', component: SearchPageComponent },
   { path: 'navbar', component: NavBarComponent },
+  {path: '**', redirectTo: '/home', pathMatch: 'full'}     //this line redirects anything not defined above it to go to home, which runs an autodetect for login.
 ];
 
 

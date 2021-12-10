@@ -19,11 +19,18 @@ export class NavBarComponent implements OnInit {
 
   constructor(
     public loginService:LoginService,
-  ) {}
+  ) 
+  {
+
+  }
+
+
 
   ngOnInit(): void {
 
   }
+
+
 
   Logout() {
     this.loginService.Logout();
