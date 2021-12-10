@@ -11,6 +11,8 @@ import { User } from 'src/app/objectClasses/user';
 import { first, firstValueFrom } from 'rxjs';
 import { GameDetails } from 'src/app/objectClasses/game-details';
 import { IGDBAPIService } from 'src/app/services/igdbapi.service';
+//import {Note} from '../objectClasses/note';
+import { NotesService } from 'src/app/services/notes.service';
 
 
 
@@ -30,6 +32,7 @@ export class MyGamesPageComponent implements OnInit {
   myGames1: any[] = [];
   myGamesClassArray: Game[] = [];
   myGameDetailsArray:GameDetails[] = [];
+  game?: Game;
   
   // gameID?: Number = 0;    //i dont think these need to be here, but keeping them for now. might delete soon once i have a fresh head/not 2am
   // gameDateTime?: string;
@@ -41,6 +44,7 @@ export class MyGamesPageComponent implements OnInit {
     private router: Router,
     public userService: UsersService,
     public IGDBService: IGDBAPIService,
+    public NotesService: NotesService
   ) {this.loginService.CheckLogin();} //checks for auth, auto-logout if not auth
 
 
@@ -110,8 +114,16 @@ export class MyGamesPageComponent implements OnInit {
     console.log(this.myGamesArray);
     console.log("getmygames internal data above");
   }
+ /*  deleteGame(): void{
 
+    const gameID = this.game?.gameID;
+    this.userService.deleteGame(gameID)
+    .subscribe(data => console.log(data.message));
+
+} */
+/* saveNote(): void{
+  this.NotesService.updateNote(this.game?.gameID, this.game)
+  .subscribe(data => console.log(data));
+} */
 
 }
-
-
