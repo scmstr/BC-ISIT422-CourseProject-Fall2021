@@ -1,1 +1,16 @@
 <p>new-account-page works!</p>
+
+
+make new account here!
+<br/><br/>
+<label>new username: </label><input type="text" id="username" name="username" [(ngModel)]="newUsernameInput">
+<br /><br />
+
+<label>new password: </label><input  type="password" id="newPassword" name="newPassword" [(ngModel)]="newPasswordInput">
+<br />
+<label>confirm new password: </label><input  type="password" id="confirmNewPassword" name="confirmNewPassword" [(ngModel)]="confirmNewPasswordInput">
+
+<br/><br/>
+<button (click)=CreateNewUser(newUsernameInput,newPasswordInput,confirmNewPasswordInput)>Submit!</button>
+
+

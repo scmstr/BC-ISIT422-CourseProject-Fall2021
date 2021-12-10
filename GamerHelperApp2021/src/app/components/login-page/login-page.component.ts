@@ -9,6 +9,7 @@ import { AppComponent } from 'src/app/app.component';
 import { LoginService } from 'src/app/services/login.service';
 
 
+
 @Component({
   selector: 'app-login-page',
   templateUrl: './login-page.component.html',
@@ -21,31 +22,53 @@ export class LoginPageComponent implements OnInit {
     private location: Location,
     private route: ActivatedRoute,
     private router: Router,
-  ) {this.loginService.CheckLogin();}
+  ) {
+    this.loginService.IsLoggedIn();
+  
+  }
+
+  usernameInput!:string;
+  passwordInput!:string;
+
 
   ngOnInit(): void {
-    this.loginService.CheckLogin();
+    this.loginService.IsLoggedIn();
   }
 
 
   LogIn(): void {
-    this.loginService.loggedIn = true;
-    this.router.navigate(['/home']);
+    //////////////////
+    ////old method////
+    //////////////////
+    //this.loginService.loggedIn = true;
+    //this.router.navigate(['/home']);
 
-    //get user input from html boxes
 
-    //run testauth method
-      //create object with inputData
-      //runs TestAuth(inputData) through login service
+    //////////////////
+    ////new method////
+    //////////////////
 
-    //if true, navigate home
 
-    //if false, error!
+    if (this.usernameInput == undefined) {
+      //if the username input is blank...
 
+      this.router.navigate(['/home']);
+      //send error notification saying that the username is blank
+    }
+    else {
+      //if username is not blank...
+
+      this.loginService.TestThisAuth(this.usernameInput, this.passwordInput);  //this method takes in the user:pass, sends it to node, gets back if it's valid or not, and either logs in the user or not.
+    }
+
+
+
+    
+    
   }
 
 
-
+  
 
 
 

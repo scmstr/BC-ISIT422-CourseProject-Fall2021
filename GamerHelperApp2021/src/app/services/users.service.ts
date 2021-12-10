@@ -57,14 +57,20 @@ deleteGame(userID: number): Observable<X>{
   return this.http.delete<X>('http://localhost:3000/myGames/' + userID);
 }
 
+ 
 
 
 
-
-
+  
 
 
 
 }
+
+
+
+
+
+
 
 

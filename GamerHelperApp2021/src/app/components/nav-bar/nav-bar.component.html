@@ -1,11 +1,13 @@
 <p>nav-bar works!</p>
-<nav *ngIf="loginService.loggedIn">
+<nav *ngIf="loginService.IsLoggedIn()"> 
     <a routerLink="/home">Home</a>
     <a routerLink="/myGames">My Games</a>
     <a routerLink="/search">Search</a>
     <a (click)='Logout()'>Log Out</a>
 </nav>
 
-<nav *ngIf="!loginService.loggedIn">
+
+<!-- this is redundant, this component only shows if CheckLogin() comes back true (unreachable code, theoretically) -->
+<nav *ngIf="!loginService.IsLoggedIn()">
     <a routerLink="/login">Go to Login Screen</a>
 </nav>

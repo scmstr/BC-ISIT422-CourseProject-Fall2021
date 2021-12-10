@@ -22,11 +22,24 @@ game?: Game;
     private route: ActivatedRoute,
     private router: Router,
     public UsersService: UsersService,
-  ) {this.loginService.CheckLogin();}
+  ) 
+  {
+    if (!this.loginService.IsLoggedIn()) 
+    {
+      loginService.Logout(); //checks for auth, auto-logout if not auth
+    }
+  }    
+
+
+
 
   ngOnInit(): void {
-    this.loginService.CheckLogin();
+    if (!this.loginService.IsLoggedIn())
+      {
+        this.loginService.Logout();
+      }
   }
+
 
 
   //show all notes for this game upon first loading page
@@ -34,10 +47,15 @@ game?: Game;
   //method that saves game to list -and enables NewNote button 
 
   //method that removes game from list -and disables NewNote button 
+
+
+  //GetGameDetailsByID
+
 /* deleteGame():void{
   const gameID = this.game?.gameID;
   this.UsersService.deleteGame(gameID)
 } */
+
 
 
 
