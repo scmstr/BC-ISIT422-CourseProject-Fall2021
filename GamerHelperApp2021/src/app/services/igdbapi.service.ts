@@ -37,7 +37,7 @@ export class IGDBAPIService {
   GetSearchGamesByString(SearchString: string): Observable<any>{
     let someHeader = new HttpHeaders().set("Authorization", "Bearer ofst5rsrnn9wlnbzkwmreiw4h014fl");
     someHeader = someHeader.append("Client-ID", "51hzf1cgu4unrfeuq3rmyz4t8d2s5y");
-    return this.http.get("https://api.igdb.com/v4/games/?search=" + SearchString + "&limit=4&fields=first_release_date,name,rating,summary,url", {headers: someHeader})
+    return this.http.get("http://localhost:8080/https://api.igdb.com/v4/games/?search=" + SearchString + "&limit=7&fields=first_release_date,name,rating,summary,url", {headers: someHeader})
     //return this.http.get("[CORS-EVERYWHERE-SERVER-ADDRESS-HERE]/https://api.igdb.com/v4/games/?search=" + SearchString + "&limit=4&fields=first_release_date,name,rating,summary,url", {headers: someHeader})
     //make sure to set these to https!!!!
   }

@@ -1,1 +1,68 @@
 <p>game-details-page works!</p>
+
+
+
+
+
+
+<div *ngIf="gameResults" class="card align-items-center" style="width: 75rem;">
+
+    <h2>{{gameResults.gameName}}</h2>
+
+    <div>
+        <span><strong>Game Title: </strong></span><br />
+        {{gameResults.gameName}}
+        <br /><br />
+
+        <span><strong>Community Rating: </strong></span><br />
+        {{gameResults.gameRating}}
+        <br /><br />
+
+        <span><strong>Release Date: </strong></span><br />
+        {{gameResults.releaseDate}}
+        <br /><br />
+
+        <span><strong>Description: </strong></span><br />
+        {{gameResults.gameSummary}}
+        <br /><br />
+    </div>
+    
+
+    <div class="card align-items-center" style="width: auto;">
+        <span>
+            <span *ngIf="isInList"> <button class="btn btn-success"  style="width: 13rem;" routerLink="/noteDetails/:{{gameResults.gameID}}">Add New Note</button> &nbsp; &nbsp; &nbsp; </span>
+            
+            <span *ngIf="!isInList"> <button class="btn btn-success"  style="width: 13rem;" (click)="AddToMyGames(gameResults.gameID)">Add To My Games</button></span>
+            
+            <span *ngIf="isInList"> &nbsp; &nbsp; &nbsp; <button class="btn btn-danger"  style="width: 13rem;" (click)="RemoveFromMyGames(gameResults.gameID)">Remove From My Games</button></span>
+        </span>
+    </div>
+
+    <br />
+    <br />
+    &nbsp; &nbsp; &nbsp;
+
+    &nbsp; &nbsp; &nbsp;
+
+    <div *ngIf="isInList" class="card align-items-center" style="width: 50rem;">
+        <h4>My Notes For: {{gameResults.gameName}}</h4>
+        <div>
+            <ul class="Note" style="width: 50rem;">
+                 <li>  <!-- *ngFor="let aGame of ****;" -->
+                    <div class="card align-items-center" style="width: 40rem;">
+                        a single note content here
+                        <br />
+                    </div>
+                    
+                </li>
+            </ul>
+        </div>
+
+    </div>
+    
+
+    
+ 
+
+
+</div>

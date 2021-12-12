@@ -1,9 +1,19 @@
 <p>nav-bar works!</p>
-<nav *ngIf="loginService.IsLoggedIn()"> 
-    <a routerLink="/home">Home</a>
-    <a routerLink="/myGames">My Games</a>
-    <a routerLink="/search">Search</a>
-    <a (click)='Logout()'>Log Out</a>
+<nav class="card align-items-center" style="width: 32rem;" *ngIf="loginService.IsLoggedIn()">  <!--  -->
+    <span style="width: auto;">
+        
+        <button type="button" class="btn btn-info btn-lg" routerLink="/home">Home</button>
+        &nbsp; &nbsp;
+
+        <button type="button" class="btn btn-info btn-lg" routerLink="/myGames">My Games</button>
+        &nbsp; &nbsp;
+
+        <button type="button" class="btn btn-info btn-lg" routerLink="/search">Search</button>
+        &nbsp; &nbsp;
+
+        <button type="button" class="btn btn-info btn-lg" (click)='Logout()'>Log Out</button>
+
+    </span>
 </nav>
 
 

@@ -1,19 +1,71 @@
 <p>search-page works!</p>
 
-<label>Search:</label><input>
+<label>Search:</label><input  type="text" id="searchInputID" name="searchInput"  [(ngModel)]="searchInput">
 
 <br>
 
-<button (click)=Search()>Search</button>
+<button (click)=Search(searchInput)>Search</button>
 <br /> <br /> <br />
 
 
-<div class="card" style="width: 25rem;"*ngIf="searched">
+<div class="card" style="width: 25rem;" *ngIf="searched">
     <br />
     <h2>Results:</h2>
     <br />
     <br />
 
+    <div *ngIf="gameResults.length == 0">
+        <h2> No Results. </h2>
+    </div>
+
+    <ul class="Game">
+        <li *ngFor="let aGame of gameResults;">
+            
+            <div class="card align-items-center" style="width: 18rem;">
+
+                <!-- game details -->
+                <button class="btn btn-link" routerLink="/game/:{{aGame.gameID}}">Game Name: {{aGame.gameName}}
+                <br />
+                Game ID: {{aGame.gameID}}
+                </button>
+                <br />
+                <button class="btn btn-success"  style="width: 13rem;" (click)="AddToMyGames(aGame.gameID)">add to my games</button>
+                <button class="btn btn-danger"  style="width: 13rem;" (click)="AddToMyGames(aGame.gameID)">remove from my games</button>
+                <br />
+
+            </div>
+
+            
+
+
+            <br />
+        </li>
+    </ul>
+
+
+
+
+
+
+
+
+
+</div> 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 
     <div>
         <div class="card align-items-center" style="width: 20rem;">
             <a class="btn btn-link" style="width: 18rem;" routerLink="/game/:2">game1 name</a>
@@ -33,6 +85,4 @@
         </div>
         <br />
     </div>
-    
-
-</div>
+      -->

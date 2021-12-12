@@ -22,6 +22,7 @@ import { MyGamesPageComponent } from './components/my-games-page/my-games-page.c
 import { GameDetailsPageComponent } from './components/game-details-page/game-details-page.component';
 import { SearchPageComponent } from './components/search-page/search-page.component';
 import { NoteDetailsPageComponent } from './components/note-details-page/note-details-page.component';
+import { NotesService } from './services/notes.service';
 
 
 
@@ -46,7 +47,7 @@ import { NoteDetailsPageComponent } from './components/note-details-page/note-de
     HttpClientModule
   ],
   providers: [
-
+    
   ],
   bootstrap: [
     AppComponent

@@ -11,7 +11,7 @@ import { User } from 'src/app/objectClasses/user';
 import { first, firstValueFrom } from 'rxjs';
 import { GameDetails } from 'src/app/objectClasses/game-details';
 import { IGDBAPIService } from 'src/app/services/igdbapi.service';
-//import {Note} from '../objectClasses/note';
+import { Note } from 'src/app/objectClasses/note';
 import { NotesService } from 'src/app/services/notes.service';
 
 
@@ -28,14 +28,8 @@ import { NotesService } from 'src/app/services/notes.service';
 
 export class MyGamesPageComponent implements OnInit {
 
-  myGamesArray?: Game[];
-  myGames1: any[] = [];
-  myGamesClassArray: Game[] = [];
-  myGameDetailsArray:GameDetails[] = [];
-  game?: Game;
-  
-  // gameID?: Number = 0;    //i dont think these need to be here, but keeping them for now. might delete soon once i have a fresh head/not 2am
-  // gameDateTime?: string;
+  myGames: GameDetails[] = {} as GameDetails[];
+
 
   constructor(
     public loginService:LoginService,
@@ -43,8 +37,8 @@ export class MyGamesPageComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     public userService: UsersService,
-    public IGDBService: IGDBAPIService,
-    public NotesService: NotesService
+    public igdb: IGDBAPIService,
+    public NotesService: NotesService,
   ) 
   {
     if (!this.loginService.IsLoggedIn()) 
@@ -63,9 +57,9 @@ export class MyGamesPageComponent implements OnInit {
       }
     else
     {
-      this.getMyGames();
+      this.GetMyGamesNow();
     }
-      
+    
 
   }
 
@@ -73,35 +67,84 @@ export class MyGamesPageComponent implements OnInit {
 
 
   //this method's messiness is an artifact. It's currently functional, but can be RADICALLY cleaned up by looking at home-page-component.ts and the GetGameByID() method at/near bottom.
-  getMyGames(): void {
+  GetMyGamesNow(): void {
     this.userService.GetMyGames(this.loginService.GetMyUID()) //this should be returning an observable<Game[]>
-    .subscribe(myGames => {
-      this.myGamesArray = myGames;
-
-      //puts each game onto its own line
-      for (let i = 0; i < myGames.length; i++) {
-        this.myGames1.push(this.myGamesArray[i]);
-      }
+    .subscribe(returnedGames => {
+      this.myGames = [];
 
       //creates Game objects with the data
-      for (let i = 0; i < this.myGames1.length; i++) {
-        this.myGamesClassArray.push(new Game(this.myGames1[i][0], this.myGames1[i][1], this.myGames1[i][2]));
+      for (let i = 0; i < returnedGames.length; i++) {
+        this.igdb.GetGameByID(returnedGames[i][0])
+          .subscribe(returnedGame => {
+            this.myGames.push(new GameDetails(returnedGame[0].id, returnedGame[0].first_release_date, returnedGame[0].name, returnedGame[0].rating, returnedGame[0].summary, returnedGame[0].url));
+            //sort by timestamp here to make list of games appear by "most recently played"
+          }
+        );
+
+
       }
-
-
-
-    });
+    }
+    );
   }
- /*  deleteGame(): void{
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  /*  deleteGame(): void{
 
     const gameID = this.game?.gameID;
     this.userService.deleteGame(gameID)
     .subscribe(data => console.log(data.message));
 
-} */
-/* saveNote(): void{
-  this.NotesService.updateNote(this.game?.gameID, this.game)
-  .subscribe(data => console.log(data));
-} */
+  } */
+
+
+
+  /* saveNote(): void{
+    this.NotesService.updateNote(this.game?.gameID, this.game)
+    .subscribe(data => console.log(data));
+  } */
+
+
+
+
 
 }

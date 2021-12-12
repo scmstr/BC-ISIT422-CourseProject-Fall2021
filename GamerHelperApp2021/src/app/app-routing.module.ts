@@ -27,10 +27,10 @@ const routes: Routes = [
   { path: 'myGames', component: MyGamesPageComponent },
   { path: 'game/:id', component: GameDetailsPageComponent },
   { path: 'newAccount', component: NewAccountPageComponent },
-  { path: 'noteDetails', component: NoteDetailsPageComponent },
+  { path: 'noteDetails/:gameID', component: NoteDetailsPageComponent },
   { path: 'search', component: SearchPageComponent },
   { path: 'navbar', component: NavBarComponent },
-  {path: '**', redirectTo: '/home', pathMatch: 'full'}     //this line redirects anything not defined above it to go to home, which runs an autodetect for login.
+  { path: '**', redirectTo: '/home', pathMatch: 'full' },     //this line redirects anything not defined above it to go to home, which runs an autodetect for login.
 ];
 
 
