@@ -56,12 +56,6 @@ export class HomePageComponent implements OnInit {
       this.loginService.Logout();
 
     }  
-    
-    this.igdb.GetGameByID(231)
-      .subscribe (returnData => {
-        this.aGame = new GameDetails(returnData[0].id, returnData[0].first_release_date, returnData[0].name, returnData[0].rating, returnData[0].summary, returnData[0].url);
-      }
-    )
 
     this.userService.GetMyUsername()
       .subscribe(returnData => {
@@ -71,6 +65,8 @@ export class HomePageComponent implements OnInit {
         console.log(returnData)
       }
     );
+
+    
 
 
 

@@ -32,7 +32,7 @@
         <span>
             <span *ngIf="isInList"> <button class="btn btn-success"  style="width: 13rem;" routerLink="/noteDetails/:{{gameResults.gameID}}">Add New Note</button> &nbsp; &nbsp; &nbsp; </span>
             
-            <span *ngIf="!isInList"> <button class="btn btn-success"  style="width: 13rem;" (click)="AddToMyGames(gameResults.gameID)">Add To My Games</button></span>
+            <span *ngIf="!isInList"> <button class="btn btn-success"  style="width: 13rem;" (click)="AddToMyGames(gameResults)">Add To My Games</button></span>
             
             <span *ngIf="isInList"> &nbsp; &nbsp; &nbsp; <button class="btn btn-danger"  style="width: 13rem;" (click)="RemoveFromMyGames(gameResults.gameID)">Remove From My Games</button></span>
         </span>

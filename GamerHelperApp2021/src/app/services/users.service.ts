@@ -56,61 +56,31 @@ export class UsersService {
   }
 
 
-  //add new game to a user's list
-  AddGame(userID: number, aGame:GameDetails): Observable<any> {
-    console.log("add game service ran");
-    console.log("the game the service is trying to send up in JSON is: ");
-    console.log(JSON.stringify(aGame));
-    return this.http.get<any>('http://localhost:3000/addGame/' + userID + "/" + aGame.gameID + "/" + aGame.gameName);
+  //add new game to a user's list - WORKS WITH ERRORS
+  AddGame(pUserID: number, pGameID:number, pGameName:string): Observable<any> {
+    console.log("add game method in user.service just ran.");
+    return this.http.get<any>('http://localhost:3000/addGame/' + pUserID + "/" + pGameID + "/" + pGameName);
   }
 
-  
-  //delete a game from user's list
-  DeleteGame(userID: number): Observable<Message> {
+
+  //delete a game from user's list - WORKS
+  DeleteGame(pUserID: number, pGameID: number): Observable<any> {
     console.log("delete game service ran");
-    return this.http.delete<Message>('http://localhost:3000/myGames/' + userID);
+    return this.http.get<any>('http://localhost:3000/deleteGame/' + pUserID + "/" + pGameID);
   }
 
 
-  //for add/remove to/from myGames list in node. to see if there should be an ADD or REMOVE button. Also to see if "write note" button is available.
-  IsGameInMyList(pGameID:number, pUserID:number):Observable<boolean> {
+  //for add/remove to/from myGames list in node. to see if there should be an ADD or REMOVE button. Also to see if "write note" button is available. - WORKS
+  IsGameInMyGames(pGameID:number, pUserID:number):Observable<any> {
     console.log("IsGameInMyList in user.service ran.");
-    return this.http.get<boolean>('http://localhost:3000/isGameInMyGames/' + pGameID + "/" + pUserID);
+    return this.http.get<any>('http://localhost:3000/isGameInMyGames/' + pGameID + "/" + pUserID);
   }
  
 
 
 
-  //incomplete
-  ConvertGameToGameDetails(pGameObj:Game):GameDetails {
-    let gameDetailsOutput: GameDetails = {} as GameDetails;
-
-    this.igdb.GetGameByID(pGameObj.gameID)
-      .subscribe(returnData => {
-        gameDetailsOutput = new GameDetails(returnData.gameID, returnData.releaseDate, returnData.gameName, returnData.gameRating, returnData.gameSummary, returnData.gameURL);
 
 
-        console.log("returnData: " + returnData);
-      }
-    );
-        
-
-    return gameDetailsOutput;
-  }
-
-
-
-  //incomplete
-  ConvertGameDetailsToGame(pGameDetailsObj:GameDetails):Game {
-    let gameOutput: Game = new Game(pGameDetailsObj.gameID, "TIMESTAMPHERE", pGameDetailsObj.gameName);
-    
-
-    return gameOutput;
-  }
-
-
-
-  
 
 
 

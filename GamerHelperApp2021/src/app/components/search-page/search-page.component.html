@@ -20,69 +20,18 @@
 
     <ul class="GameDetails">
         <li *ngFor="let aGame of gameResults;">
-            
             <div class="card align-items-center" style="width: 18rem;">
-
                 <!-- game details -->
                 <button class="btn btn-link" routerLink="/game/:{{aGame.gameID}}">Game Name: {{aGame.gameName}}
-                <br />
-                Game ID: {{aGame.gameID}}
+                    <br />
+                    Game ID: {{aGame.gameID}}
                 </button>
                 <br />
-                <button class="btn btn-success"  style="width: 13rem;" (click)="AddToMyGames(aGame)">add to my games</button>
-                <button class="btn btn-danger"  style="width: 13rem;" (click)="AddToMyGames(aGame)">remove from my games</button>
-                <br />
-
+                <button type="button" class="btn btn-primary" style="width: 13rem;" (click)="AddToMyGames(aGame.gameID, aGame.gameName);" >add to my games</button>
             </div>
-
-            
-
-
             <br />
         </li>
     </ul>
 
-
-
-
-
-
-
-
-
 </div> 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-<!-- 
-    <div>
-        <div class="card align-items-center" style="width: 20rem;">
-            <a class="btn btn-link" style="width: 18rem;" routerLink="/game/:2">game1 name</a>
-            <br />
-        </div>
-        <br />
-    
-        <div class="card align-items-center" style="width: 20rem;">
-            <a class="btn btn-link" style="width: 18rem;" routerLink="/game/:2">game1 name</a>
-            <br />
-        </div>
-        <br />
-    
-        <div class="card align-items-center" style="width: 20rem;">
-            <a class="btn btn-link" style="width: 18rem;" routerLink="/game/:2">game1 name</a>
-            <br />
-        </div>
-        <br />
-    </div>
-      -->

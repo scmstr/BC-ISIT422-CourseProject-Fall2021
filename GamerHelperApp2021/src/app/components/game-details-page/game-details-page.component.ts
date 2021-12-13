@@ -32,8 +32,7 @@ export class GameDetailsPageComponent implements OnInit {
 
   gameResults: GameDetails = {} as GameDetails;
   noteResults: Note[] = {} as Note[];
-  //isInList:boolean = {} as boolean;
-  isInList:boolean = false;
+  isInList: boolean = {} as boolean;
 
 
   constructor(
@@ -41,7 +40,7 @@ export class GameDetailsPageComponent implements OnInit {
     private location: Location,
     private route: ActivatedRoute,
     private router: Router,
-    public usersService: UsersService,
+    public userService: UsersService,
     public igdb: IGDBAPIService,
     public noteService: NotesService,
   ){
@@ -69,8 +68,6 @@ export class GameDetailsPageComponent implements OnInit {
         this.gameResults = new GameDetails(returnData[0].id, returnData[0].first_release_date, returnData[0].name, returnData[0].rating, returnData[0].summary, returnData[0].url);
         
 
-
-
         //now get the notes from Node.JS server  (and thus mongo) for this gameID and UID
         this.noteService.GetNotesForThisGameAndUser(Number(this.route.snapshot.paramMap.get('id')?.substring(1)), this.loginService.GetMyUID())
           .subscribe(returnData2 =>{
@@ -93,7 +90,7 @@ export class GameDetailsPageComponent implements OnInit {
 
     );
 
-    this.usersService.IsGameInMyList(Number(this.route.snapshot.paramMap.get('id')?.substring(1)), this.loginService.GetMyUID())
+    this.userService.IsGameInMyGames(Number(this.route.snapshot.paramMap.get('id')?.substring(1)), this.loginService.GetMyUID())
       .subscribe(returnData => {
         this.isInList = false;
         this.isInList = returnData;
@@ -103,27 +100,70 @@ export class GameDetailsPageComponent implements OnInit {
 
 
 
-
-
-
-
-
+    //here and above is ngOnInit 
   }
 
 
 
 
 
+  //-----------------------------------WORKS
+  AddToMyGames(pAGame:GameDetails) {
 
-  AddToMyGames(pGameID:number) {
-    //userService.add this gameID to the user's list
-    //send you to my-games page
+    this.userService.IsGameInMyGames(pAGame.gameID, this.loginService.GetMyUID())
+      .subscribe(returnData => {
+
+        //if this game isnt in this user's list, add it
+        if (returnData == false) 
+        {
+          console.log("game was not in list. Running userService.AddGame()... ");
+          this.userService.AddGame(this.loginService.GetMyUID(), pAGame.gameID, pAGame.gameName)
+            .subscribe(returnData => {
+              console.log("message from node server: ")
+              console.log(returnData);
+               
+            }
+          );
+        }
+        else if(returnData == true)//if this game IS in this user's list
+        {
+          console.log("game is already in user's list.");
+          //throw some sort of error or message because you shouldn't be able to run this method if the game is already in the list because there should be a check to enable visibility of any "add" button
+        }
+
+        this.router.navigateByUrl('/RefreshComponent2', { skipLocationChange: true }).then(() => {
+          this.router.navigate(['/game/:' + Number(this.route.snapshot.paramMap.get('id')?.substring(1))]);
+        });
+        !this.isInList;
+      }
+    )
+
+    console.log("AddToMyGames method in the component ran.");
+    
   }
+
 
 
   RemoveFromMyGames(pGameID:number) {
     //userService.remove this gameID from the user's lsit
     //send you do my-games page
+
+    this.userService.DeleteGame(this.loginService.GetMyUID(), pGameID)
+      .subscribe(returnData => {
+        console.log("deletegame in userService ran.");
+
+        console.log("return data from userService.DeleteGame: ")
+        console.log(returnData);
+
+        this.router.navigateByUrl('/RefreshComponent', { skipLocationChange: true }).then(() => {
+          this.router.navigate(['/game/:' + Number(this.route.snapshot.paramMap.get('id')?.substring(1))]);
+        }); 
+        !this.isInList;
+      }
+    )
+    console.log("remove from my games ran. pGameID: ");
+    console.log(pGameID);
+    
   }
 
 

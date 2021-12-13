@@ -46,6 +46,8 @@ export class SearchPageComponent implements OnInit {
   searchInput!:string;
   searched?:boolean = false;
   gameResults: GameDetails[] = {} as GameDetails[];
+  isInList:boolean = {} as boolean;
+
 
 
   Search(pSearchInput:string) {
@@ -77,19 +79,19 @@ export class SearchPageComponent implements OnInit {
   }
 
 
-  AddToMyGames(pAGame:GameDetails) {
+  AddToMyGames(pGameID:number, pGameName:string) {
 
-    this.userService.IsGameInMyList(pAGame.gameID, this.loginService.GetMyUID())
+    this.userService.IsGameInMyGames(pGameID, this.loginService.GetMyUID())
       .subscribe(returnData => {
 
         //if this game isnt in this user's list, add it
         if (returnData == false) 
         {
           console.log("game was not in list. Running userService.AddGame()... ");
-          this.userService.AddGame(this.loginService.GetMyUID(), pAGame)
-            .subscribe(returnData => {
+          this.userService.AddGame(this.loginService.GetMyUID(), pGameID, pGameName)
+            .subscribe(returnData2 => {
               console.log("message from node server: ")
-              console.log(returnData);
+              console.log(returnData2);
             }
           );
         }
@@ -98,16 +100,21 @@ export class SearchPageComponent implements OnInit {
           console.log("game is already in user's list.");
           //throw some sort of error or message because you shouldn't be able to run this method if the game is already in the list because there should be a check to enable visibility of any "add" button
         }
+        else
+        {
+          console.log("returnData neither true nor false.")
+        }
+        
+        console.log("AddToMyGames method in the component ran.");
+        console.log("is this game in mygames list? : ");
+        console.log(returnData);
 
       }
     )
 
 
-    console.log("AddToMyGames method in the component ran.");
+    
   }
-
-
-
 
 
 
