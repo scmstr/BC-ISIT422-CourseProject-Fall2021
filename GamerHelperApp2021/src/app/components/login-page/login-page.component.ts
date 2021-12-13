@@ -52,7 +52,7 @@ export class LoginPageComponent implements OnInit {
     if (this.usernameInput == undefined) {
       //if the username input is blank...
 
-      this.router.navigate(['/home']);
+      this.router.navigate(['/home']); //this means to reload the page.
       //send error notification saying that the username is blank
     }
     else {

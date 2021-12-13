@@ -50,6 +50,7 @@ export class HomePageComponent implements OnInit {
   aGame: GameDetails = {} as GameDetails;
 
   ngOnInit(): void {
+    this.username = ""; //blanks the username 
     if (!this.loginService.IsLoggedIn())
     {
       this.loginService.Logout();
@@ -65,6 +66,9 @@ export class HomePageComponent implements OnInit {
     this.userService.GetMyUsername()
       .subscribe(returnData => {
         this.username = returnData;
+
+        console.log("get username return data: ");
+        console.log(returnData)
       }
     );
 
@@ -72,14 +76,13 @@ export class HomePageComponent implements OnInit {
 
 
 
-    
+
   }
 
 
 
   
-
-
+  
   
 
 

@@ -12,7 +12,6 @@ import { Game } from '../objectClasses/game';
 import { LoginService } from './login.service';
 import { Message } from '../objectClasses/message';
 import { GameDetails } from '../objectClasses/game-details';
-import { GameDetailsPageComponent } from '../components/game-details-page/game-details-page.component';
 import { IGDBAPIService } from './igdbapi.service';
 
 
@@ -36,10 +35,10 @@ export class UsersService {
   //other libraries/external addresses need to be https, too (bootstrap, whatever)
 
 
-  //get the username of this user, to show welcome message
+  //get the username of this user, to show welcome message - WORKS
   GetMyUsername():Observable<any> {
     if (this.loginService.IsLoggedIn()) {
-      return this.http.get<any[]>('http://localhost:3000/GetUsername/' + this.loginService.GetMyUID());
+      return this.http.get<any[]>('http://localhost:3000/getMyUsername/' + this.loginService.GetMyUID());
     }
     else
     {
@@ -49,18 +48,20 @@ export class UsersService {
   }
 
 
-  //gets all games for a single user
+  //gets all games for a single user - WORKS
   GetMyGames(userID:number): Observable<any[]> {
     console.log("getmygames service ran");
-    return this.http.get<any[]>('http://localhost:3000/myGames/' + userID);
+    return this.http.get<any[]>('http://localhost:3000/getMyGames/' + userID);
     //return this.http.get<User>('OTHER ADDRESS/myGames' + userID);
   }
 
 
   //add new game to a user's list
-  AddGame(userID: number, gameID:number): Observable<Game> {
+  AddGame(userID: number, aGame:GameDetails): Observable<any> {
     console.log("add game service ran");
-    return this.http.put<Game>('http://localhost:3000/myGames/' + userID , gameID)
+    console.log("the game the service is trying to send up in JSON is: ");
+    console.log(JSON.stringify(aGame));
+    return this.http.get<any>('http://localhost:3000/addGame/' + userID + "/" + aGame.gameID + "/" + aGame.gameName);
   }
 
   
@@ -71,9 +72,10 @@ export class UsersService {
   }
 
 
-  IsGameInMyList(pGameID:number):Observable<boolean> {
+  //for add/remove to/from myGames list in node. to see if there should be an ADD or REMOVE button. Also to see if "write note" button is available.
+  IsGameInMyList(pGameID:number, pUserID:number):Observable<boolean> {
     console.log("IsGameInMyList in user.service ran.");
-    return this.http.get<boolean>('http://localhost:3000/IsInMyGames/' + pGameID);
+    return this.http.get<boolean>('http://localhost:3000/isGameInMyGames/' + pGameID + "/" + pUserID);
   }
  
 

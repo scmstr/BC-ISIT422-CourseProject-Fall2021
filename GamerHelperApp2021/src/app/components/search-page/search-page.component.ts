@@ -55,8 +55,8 @@ export class SearchPageComponent implements OnInit {
       .subscribe (returnData => {
 
         //init the array with garbage, then clear it
-        this.gameResults = [new GameDetails(3, "", "", "", "", "")];
-        this.gameResults.pop();
+        this.gameResults = [];
+
 
         //load the array with the results
         for (let i = 0; i < returnData.length; i++) {
@@ -77,17 +77,31 @@ export class SearchPageComponent implements OnInit {
   }
 
 
-  AddToMyGames(pGameID:number) {
-    
-    //if this game isnt in this user's list, add it
-    if (!this.userService.IsGameInMyList(pGameID).subscribe()) 
-    {
-      this.userService.AddGame(this.loginService.GetMyUID(), pGameID);
-    }
-    else //if this game IS in this user's list
-    {
-    //throw some sort of error or message because you shouldn't be able to run this method if the game is already in the list because there should be a check to enable visibility of any "add" button
-    }
+  AddToMyGames(pAGame:GameDetails) {
+
+    this.userService.IsGameInMyList(pAGame.gameID, this.loginService.GetMyUID())
+      .subscribe(returnData => {
+
+        //if this game isnt in this user's list, add it
+        if (returnData == false) 
+        {
+          console.log("game was not in list. Running userService.AddGame()... ");
+          this.userService.AddGame(this.loginService.GetMyUID(), pAGame)
+            .subscribe(returnData => {
+              console.log("message from node server: ")
+              console.log(returnData);
+            }
+          );
+        }
+        else if(returnData == true)//if this game IS in this user's list
+        {
+          console.log("game is already in user's list.");
+          //throw some sort of error or message because you shouldn't be able to run this method if the game is already in the list because there should be a check to enable visibility of any "add" button
+        }
+
+      }
+    )
+
 
     console.log("AddToMyGames method in the component ran.");
   }

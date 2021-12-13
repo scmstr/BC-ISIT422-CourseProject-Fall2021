@@ -3,8 +3,11 @@
 <br />
 <br />
 
-<h3>
-    Welcome, {{username[0]}}
+<h3 *ngIf="username">
+    Welcome, {{username}}
 </h3>
+
+
+<!-- show latest 3 notes here -->
 
 

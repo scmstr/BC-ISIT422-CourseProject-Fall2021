@@ -13,6 +13,9 @@ import { LoginService } from 'src/app/services/login.service';
 })
 export class NoteDetailsPageComponent implements OnInit {
 
+  noteContentInput!:string;
+
+
   constructor(
     public loginService:LoginService,
     private location: Location,
@@ -34,6 +37,11 @@ export class NoteDetailsPageComponent implements OnInit {
       }
   }
 
+
+  SaveNote(pNoteContent:string) {
+    
+
+  }
 
 
 

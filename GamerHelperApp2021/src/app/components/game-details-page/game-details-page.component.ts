@@ -77,11 +77,11 @@ export class GameDetailsPageComponent implements OnInit {
 
             console.log("return data 2 content: " + returnData2);
 
-            this.noteResults = [new Note("", 2, "", 2, 2)];
+            this.noteResults = [];
             this.noteResults.pop();
 
             returnData2.forEach(note => {
-              this.noteResults.push(new Note(returnData2[0].dateTime, returnData2[0].noteID, returnData2[0].noteContent, returnData2[0].UID, returnData2[0].gameID));
+              this.noteResults.push(new Note(returnData2[0].userID, returnData2[0].gameID, returnData2[0].noteID, returnData2[0].dateTime, returnData2[0].noteContent, ));
             });
 
             console.log("note results: " + this.noteResults);
@@ -93,7 +93,7 @@ export class GameDetailsPageComponent implements OnInit {
 
     );
 
-    this.usersService.IsGameInMyList(Number(this.route.snapshot.paramMap.get('id')?.substring(1)))
+    this.usersService.IsGameInMyList(Number(this.route.snapshot.paramMap.get('id')?.substring(1)), this.loginService.GetMyUID())
       .subscribe(returnData => {
         this.isInList = false;
         this.isInList = returnData;

@@ -64,29 +64,32 @@ export class LoginService {
     ///////////DO NOT DELETE/////////
     /////////////////////////////////
 
-    // this.VerifyLogin(pUser, pPass).subscribe(tempData => {
-    //   let tempLoginData!:LoginData;
-    //   tempLoginData = tempData;
-    //   //other code here that waits for the returned code to happen
+    // this.VerifyLogin(pUser, pPass)
+    //   .subscribe(tempData => {
 
-    //   if (tempLoginData.isValid) {
-    //     //if login is valid...
-    //     this.loggedIn = true;
-    //     this.loggedInUID = tempLoginData.UID;
-    //     this.router.navigate(['/home']);
-  
-    //     //send successfully logged in notification here
-    //     return true;
+    //     let tempLoginData!:LoginData;
+    //     tempLoginData = tempData;
+    //     //other code here that waits for the returned code to happen
+
+    //     if (tempLoginData.isValid) {
+    //       //if login is valid...
+    //       this.loggedIn = true;
+    //       this.loggedInUID = tempLoginData.UID;
+    //       this.router.navigate(['/home']);
+    
+    //       //send successfully logged in notification here
+    //       return true;
+    //     }
+    //     else {
+    //       //if login is NOT VALID...
+    //       this.loggedIn = false;
+    //       this.loggedInUID = -1;
+    //       this.router.navigate(['/login']); //maybe have this send you to home, since theres a check there anyway?
+    //       //send invalid login info notification here
+    //       return false;
+    //     }  
     //   }
-    //   else {
-    //     //if login is NOT VALID...
-    //     this.loggedIn = false;
-    //     this.loggedInUID = -1;
-    //     this.router.navigate(['/login']); //maybe have this send you to home, since theres a check there anyway?
-    //     //send invalid login info notification here
-    //     return false;
-    //   }  
-    // });
+    // );
 
 
     //Testing STUB!!!
@@ -122,6 +125,11 @@ export class LoginService {
 
 
 
+
+  //attempt to create new user here
+  CreateNewUser() {
+    
+  }
 
 
 

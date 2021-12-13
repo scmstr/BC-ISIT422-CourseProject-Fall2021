@@ -31,17 +31,21 @@ export class NotesService {
 
 
 
-  getNote(gameID: number) {
+  GetNote(gameID: number) {
     return this.http.get<Note>('http://localhost:3000/myGames/' + gameID)
   }
 
 
-  deleteNote(gameID: number): Observable<Message> {
+  DeleteNote(gameID: number): Observable<Message> {
     return this.http.delete<Message>('http://localhost:3000/myGames/'+ gameID);
   }
 
 
-  updateNote(gameID: number, oneNote: Note) : Observable<Note>{
+  AddNote(newNote: Note):Observable<Note> {
+    return this.http.post<Note>('http://localhost:3000/addNote/', newNote);
+  }
+
+  UpdateNote(gameID: number, oneNote: Note) : Observable<Note>{
     return this.http.put<Note>('http://localhost:3000/myGames/' + gameID, oneNote)
   }
 
@@ -54,6 +58,9 @@ export class NotesService {
 
   
 
+
+
+  
   GetNotesForThisGameAndUser(pGameID:number, pUID:number):Observable<Note[]> {
     return this.http.get<Note[]>('http://localhost:3000/myNotes/' + pGameID + "/" + pUID)
   }
@@ -84,6 +91,12 @@ export class NotesService {
   // });
 
 
+  //query node for this user's notes, filter by most recent 3 (need timestamps to work on note objects)
+
+  
+  GetLastThreeNotesForUser() {
+
+  }
 
 
 
