@@ -49,8 +49,8 @@ export class LoginPageComponent implements OnInit {
     //////////////////
 
 
-    if (this.usernameInput == undefined) {
-      //if the username input is blank...
+    if (this.usernameInput == undefined || this.passwordInput == undefined) {
+      //if the username or password are blank...
 
       this.router.navigate(['/home']); //this means to reload the page.
       //send error notification saying that the username is blank
@@ -58,7 +58,7 @@ export class LoginPageComponent implements OnInit {
     else {
       //if username is not blank...
 
-      this.loginService.TestThisAuth(this.usernameInput, this.passwordInput);  //this method takes in the user:pass, sends it to node, gets back if it's valid or not, and either logs in the user or not.
+      this.loginService.LogInThisUser(this.usernameInput, this.passwordInput);  //this method takes in the user:pass, sends it to node, gets back if it's valid or not, and either logs in the user or not.
     }
 
 

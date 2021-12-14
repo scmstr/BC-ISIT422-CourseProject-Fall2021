@@ -22,10 +22,7 @@
         <li *ngFor="let aGame of gameResults;">
             <div >
                 <!-- game details -->
-                <button routerLink="/game/:{{aGame.gameID}}">Game Name: {{aGame.gameName}}
-                    <br />
-                    Game ID: {{aGame.gameID}}
-                </button>
+                <button routerLink="/game/:{{aGame.gameID}}">Game Name: {{aGame.gameName}}</button>
                 <br />
                 <button (click)="AddToMyGames(aGame.gameID, aGame.gameName);" >Add To My Games</button>
             </div>

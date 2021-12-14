@@ -57,50 +57,57 @@ export class LoginService {
 
 
 
-  //this method gets in the data to test, tests it, sets the session info
-  TestThisAuth(pUser:string, pPass:string):void {
+  //logs in the user and sets the session info - 
+  LogInThisUser(pUser:string, pPass:string):void {
 
-    /////////////////////////////////
-    ///////////DO NOT DELETE/////////
-    /////////////////////////////////
+    ///////////////////////////////
+    /////////DO NOT DELETE/////////
+    ///////////////////////////////
 
-    // this.VerifyLogin(pUser, pPass)
-    //   .subscribe(tempData => {
+    this.VerifyLogin(pUser, pPass)
+      .subscribe(returnData => {
+        console.log("verifyLogin ran in service.");
 
-    //     let tempLoginData!:LoginData;
-    //     tempLoginData = tempData;
-    //     //other code here that waits for the returned code to happen
+        //other code here that waits for the returned code to happen
 
-    //     if (tempLoginData.isValid) {
-    //       //if login is valid...
-    //       this.loggedIn = true;
-    //       this.loggedInUID = tempLoginData.UID;
-    //       this.router.navigate(['/home']);
+        if (returnData.isValid) {
+          //if login is valid...
+          console.log("return data isValid is: ");
+          console.log(returnData.isValid);
+          this.loggedIn = true;
+
+          this.loggedInUID = returnData.userID;
+          console.log("return data UID is: ");
+          console.log(returnData.userID);
+
+          this.router.navigate(['/home']);
     
-    //       //send successfully logged in notification here
-    //       return true;
-    //     }
-    //     else {
-    //       //if login is NOT VALID...
-    //       this.loggedIn = false;
-    //       this.loggedInUID = -1;
-    //       this.router.navigate(['/login']); //maybe have this send you to home, since theres a check there anyway?
-    //       //send invalid login info notification here
-    //       return false;
-    //     }  
-    //   }
-    // );
+
+          return true;
+        }
+        else {
+          //if login is NOT VALID...
+          console.log("returndata.isvalid is: [" + returnData.isValid + "].");
+          this.loggedIn = false;
+          this.loggedInUID = -1;
+          this.router.navigate(['/home']); //maybe have this send you to home, since theres a check there anyway?
+          //send invalid login info notification here
+          return false;
+        }  
+      }
+    );
 
 
     //Testing STUB!!!
     //the above code chunk is the REAL ONE, below here is just for testing before the node/mongo stuff is made
-    this.loggedIn = true;
-    this.loggedInUID = Number(pUser);
-    this.router.navigate(['/home']);
+    // this.loggedIn = true;
+    // this.loggedInUID = Number(pUser);
+    // this.router.navigate(['/home']);
 
 
   }
-
+  
+  
 
 
 
@@ -126,7 +133,7 @@ export class LoginService {
 
 
 
-  //attempt to create new user here
+  //attempt to create new user here - WORKS
   CreateNewUser(pUsername:string, pPassword:string):Observable<any> {
     console.log("CreateNewUser ran in login.service and took in this username and password");
     console.log(pUsername + ":" + pPassword);

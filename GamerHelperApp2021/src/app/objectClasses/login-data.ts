@@ -1,9 +1,9 @@
 export class LoginData {
-    constructor (pIsValid:boolean, pUID:number) {
+    constructor (pIsValid:boolean, pUserID:number) {
         this.isValid = pIsValid;
-        this.UID = pUID;
+        this.userID = pUserID;
     }
-    
+
     isValid!:boolean;
-    UID!:number;
+    userID!:number;
 }

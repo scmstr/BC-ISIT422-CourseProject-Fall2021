@@ -11,13 +11,10 @@
     <ul class="GameDetails">
         <li *ngFor="let aGame of myGames;">
             <div>
-                <button routerLink="/game/:{{aGame.gameID}}">Game name: {{aGame.gameName}}
-                    <br />
-                    Game ID: {{aGame.gameID}}
-                </button>
+                <button routerLink="/game/:{{aGame.gameID}}">Game name: {{aGame.gameName}}</button>
                 <br />
 
-                <button routerLink="/noteDetails/:{{aGame.gameID}}/:{{aGame.gameName}}">Add Note</button>
+                <button routerLink="/noteDetails/:{{aGame.gameID}}/:{{aGame.gameName}}">Add New Note</button>
 
                 <br>
                 <!-- <button (click)="updateNote()">Add/Update Note</button> -->
