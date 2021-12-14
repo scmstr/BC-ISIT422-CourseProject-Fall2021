@@ -5,6 +5,7 @@ import { Location } from '@angular/common'; //automagically keeps track of brows
 
 //imports, elswhere in app
 import { LoginService } from 'src/app/services/login.service';
+import { NotesService } from 'src/app/services/notes.service';
 
 @Component({
   selector: 'app-note-details-page',
@@ -21,6 +22,7 @@ export class NoteDetailsPageComponent implements OnInit {
     private location: Location,
     private route: ActivatedRoute,
     private router: Router,
+    public noteService:NotesService,
   ) 
   {
     if (!this.loginService.IsLoggedIn()) 
@@ -33,6 +35,7 @@ export class NoteDetailsPageComponent implements OnInit {
   //variables
   gameName = this.route.snapshot.paramMap.get('gameName')?.substring(1);
   gameID = Number(this.route.snapshot.paramMap.get('gameID')?.substring(1));
+
 
 
 
@@ -49,13 +52,23 @@ export class NoteDetailsPageComponent implements OnInit {
   }
 
 
-  SaveNote(pNoteContent:string) {
+  //createNewNote gameid, notecontent - WORKS
+  SaveNote() {
+    this.noteService.CreateNewNote(this.gameID.toString(), this.noteContentInput)
+      .subscribe(returnData => {
+        console.log("create new note ran in component.")
+
+        this.router.navigateByUrl('/RefreshComponent2', { skipLocationChange: true }).then(() => {
+          this.router.navigate(['/game/:' + Number(this.route.snapshot.paramMap.get('gameID')?.substring(1))]);
+        });
 
 
+
+      }
+    )
   }
 
 
 
-  //Number(this.route.snapshot.paramMap.get('id')?.substring(1))
 
 }

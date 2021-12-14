@@ -9,6 +9,7 @@ import { identifierModuleUrl } from '@angular/compiler';
 //import, from elsewhere in app
 import { Note } from '../objectClasses/note';
 import { Message } from '../objectClasses/message';
+import { LoginService } from './login.service';
 
 
 
@@ -24,6 +25,7 @@ export class NotesService {
 
   constructor(
     private http: HttpClient,
+    public loginService: LoginService,
     ) { 
 
   }
@@ -60,9 +62,14 @@ export class NotesService {
 
 
 
+
+  CreateNewNote(pGameID:string, pNoteContent:string):Observable<any> {
+    return this.http.get<any>('http://localhost:3000/createNote/' + pGameID + "/" + this.loginService.GetMyUID() + "/" + pNoteContent);
+  }
+
   
-  GetNotesForThisGameAndUser(pGameID:number, pUID:number):Observable<Note[]> {
-    return this.http.get<Note[]>('http://localhost:3000/myNotes/' + pGameID + "/" + pUID)
+  GetNotesForThisGameAndUser(pGameID:number, pUserID:number):Observable<any[]> {
+    return this.http.get<any[]>('http://localhost:3000/notesForThisGameAndUser/' + pGameID + "/" + pUserID)
   }
 
 
@@ -93,14 +100,22 @@ export class NotesService {
 
   //query node for this user's notes, filter by most recent 3 (need timestamps to work on note objects)
 
-  
+
   GetLastThreeNotesForUser() {
 
   }
 
 
 
-
+  NoteSorter( a:Note, b:Note ) {
+    if ( a.dateTime < b.dateTime ){
+      return -1;
+    }
+    if ( a.dateTime > b.dateTime ){
+      return 1;
+    }
+    return 0;
+  }
 
 
 

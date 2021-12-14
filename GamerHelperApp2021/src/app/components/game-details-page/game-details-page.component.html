@@ -14,7 +14,7 @@
         <br /><br />
 
         <span><strong>Release Date: </strong></span><br />
-        {{aGameDate}}
+        {{gameResults.releaseDate | date:'full'}}
         <br /><br />
 
         <span><strong>Description: </strong></span><br />
@@ -42,13 +42,15 @@
     <div *ngIf="isInList" >
         <h4>My Notes For: {{gameResults.gameName}}</h4>
         <div>
-            <ul class="Note" style="width: 50rem;">
-                 <li>  <!-- *ngFor="let aGame of ****;" -->
-                    <div class="card align-items-center" style="width: 40rem;">
-                        a single note content here
+            <ul>
+                 <li *ngFor="let aNote of noteResults;">
+                    <div>
+                        {{aNote.dateTime | date:'full'}}
                         <br />
+                        <div>
+                            {{aNote.noteContent}}
+                        </div>
                     </div>
-                    
                 </li>
             </ul>
         </div>

@@ -53,6 +53,7 @@ export class GameDetailsPageComponent implements OnInit {
 
 
 
+
   ngOnInit(): void {
     if (!this.loginService.IsLoggedIn())
     {
@@ -62,8 +63,8 @@ export class GameDetailsPageComponent implements OnInit {
 
 
 
-    //show all notes for this game upon first loading page
-    this.igdb.GetGameByID(Number(this.route.snapshot.paramMap.get('id')?.substring(1))) //Number(this.route.snapshot.paramMap.get('id'))
+    //show all notes for this game upon first loading page - WORKS
+    this.igdb.GetGameByID(Number(this.route.snapshot.paramMap.get('id')?.substring(1))) 
       .subscribe(returnData => {
         this.gameResults = new GameDetails(returnData[0].id, returnData[0].first_release_date, returnData[0].name, returnData[0].rating, returnData[0].summary, returnData[0].url);
         this.aGameDate = new Date(this.gameResults.releaseDate).toString();
@@ -75,13 +76,19 @@ export class GameDetailsPageComponent implements OnInit {
         this.noteService.GetNotesForThisGameAndUser(Number(this.route.snapshot.paramMap.get('id')?.substring(1)), this.loginService.GetMyUID())
           .subscribe(returnData2 =>{
 
-            console.log("return data 2 content: " + returnData2);
+            this.noteResults =[];
+            let tempNotesArray = returnData2;
 
-            this.noteResults = [];
+            console.log("tempNotesArray content: ");
+            console.log(tempNotesArray);
 
-            returnData2.forEach(note => {
-              this.noteResults.push(new Note(returnData2[0].userID, returnData2[0].gameID, returnData2[0].noteID, returnData2[0].noteContent, returnData2[0].dateTime  ));
+            
+
+            tempNotesArray.forEach(aNote => {
+              this.noteResults.push(new Note(aNote.userID, aNote.gameID, aNote.noteID, aNote.noteContent, aNote.noteDate));
             });
+
+            this.noteResults.sort(this.noteService.NoteSorter)
 
             console.log("note results: " + this.noteResults);
           }
@@ -93,7 +100,7 @@ export class GameDetailsPageComponent implements OnInit {
     );
 
 
-
+    //finds out of this game is in my list or not - WORKS
     this.userService.IsGameInMyGames(Number(this.route.snapshot.paramMap.get('id')?.substring(1)), this.loginService.GetMyUID())
       .subscribe(returnData => {
         this.isInList = false;
@@ -109,9 +116,7 @@ export class GameDetailsPageComponent implements OnInit {
 
 
 
-
-
-  //-----------------------------------WORKS
+  //ADD to MyGames - WORKS
   AddToMyGames(pAGame:GameDetails) {
 
     this.userService.IsGameInMyGames(pAGame.gameID, this.loginService.GetMyUID())
@@ -147,7 +152,7 @@ export class GameDetailsPageComponent implements OnInit {
   }
 
 
-
+  //DELETE from MyGames - WORKS
   RemoveFromMyGames(pGameID:number) {
     //userService.remove this gameID from the user's lsit
     //send you do my-games page
@@ -172,30 +177,27 @@ export class GameDetailsPageComponent implements OnInit {
 
 
 
-
-
-
-
-
-
-
-
-  
-
-  //method that saves game to list -and enables NewNote button 
-
-  //method that removes game from list -and disables NewNote button 
-
-
-  //GetGameDetailsByID
-
-  /* deleteGame():void{
-    const gameID = this.game?.gameID;
-    this.UsersService.deleteGame(gameID)
-  } */
-
-
-
-
-
 }
+
+
+
+
+
+// __v: 0
+// ​​
+// _id: "61b91c6783c6d83de1f23adb"
+// ​​
+// gameID: 231
+// ​​
+// noteContent: "making a new note yay"
+// ​​
+// noteDate: "1639521383025"
+// ​​
+// noteID: 1101214
+// ​​
+// userID: 1891975
+
+
+
+
+
