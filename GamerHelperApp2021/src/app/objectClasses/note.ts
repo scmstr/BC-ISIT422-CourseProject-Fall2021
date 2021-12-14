@@ -8,7 +8,7 @@
 
 
 export class Note {
-  constructor(pUserID:number, pGameID:number, pNoteID:number, pNoteContent:string, pDateTime:string){
+  constructor(pUserID:number, pGameID:number, pNoteID:number, pNoteContent:string, pDateTime:Date){
     this.userID = pUserID;
     this.gameID = pGameID;
     this.noteID = pNoteID;
@@ -20,6 +20,6 @@ export class Note {
   gameID!: number;
   noteID!: number;
   noteContent!: string;
-  dateTime!: string;
+  dateTime!: Date;
 }
   

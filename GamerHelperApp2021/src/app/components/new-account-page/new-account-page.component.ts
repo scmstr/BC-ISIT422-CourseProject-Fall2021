@@ -51,17 +51,17 @@ export class NewAccountPageComponent implements OnInit {
     if (!passMatch) {
       //if passwords dont match, throw error
       this.isError = true;
-      this.errorZone += "\n\nPasswords dont match.";
+      this.errorZone += "Passwords dont match.";
     }
 
     if (!isValidUsername) {
       this.isError = true;
-      this.errorZone += "\n\nUsername is invalid. Username must be at least 4 characters long.";
+      this.errorZone += " Username is invalid. Username must be at least 4 characters long.";
     }
 
     if (!isValidPass) {
       this.isError = true;
-      this.errorZone += "\n\nPassword is invalid. Password must be at least 4 characters long.";
+      this.errorZone += " Password is invalid. Password must be at least 4 characters long.";
     }
 
 
@@ -83,7 +83,8 @@ export class NewAccountPageComponent implements OnInit {
           {
             console.log("seems to have failed? return data: ");
             console.log(returnData.message);
-            window.alert(returnData.message);
+            this.errorZone += String(returnData.message);
+            this.isError = true;
           }
 
       

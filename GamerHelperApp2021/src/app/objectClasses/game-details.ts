@@ -1,6 +1,6 @@
 export class GameDetails {
-    
-    constructor(pGameID:number, pReleaseDate:string, pGameName:string, pGameRating:string, pGameSummary:string,pGameURL:string) {
+
+    constructor(pGameID:number, pReleaseDate:Date, pGameName:string, pGameRating:string, pGameSummary:string,pGameURL:string) {
         this.gameID = pGameID;
         this.releaseDate = pReleaseDate;
         this.gameName = pGameName;
@@ -10,7 +10,7 @@ export class GameDetails {
     }
 
     gameID!: number;
-    releaseDate!: string;
+    releaseDate!: Date;
     gameName!: string;
     gameRating!: string;
     gameSummary!: string;

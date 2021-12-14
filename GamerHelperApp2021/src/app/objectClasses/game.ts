@@ -5,7 +5,7 @@
 
   export class Game {
 
-    constructor (pGameID:number, pDateTime:string, pGameName?:string) {
+    constructor (pGameID:number, pDateTime:Date, pGameName?:string) {
       this.gameID = pGameID;
       this.dateTime = pDateTime;
       this.gameName = pGameName;
@@ -14,7 +14,7 @@
 
 
     gameID!: number;
-    dateTime!: string; //needs to become a timestamp
+    dateTime!: Date; //needs to become a timestamp
     gameName?: string;
-    
+
   }

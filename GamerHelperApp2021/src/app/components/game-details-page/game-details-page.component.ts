@@ -33,7 +33,7 @@ export class GameDetailsPageComponent implements OnInit {
   gameResults: GameDetails = {} as GameDetails;
   noteResults: Note[] = {} as Note[];
   isInList: boolean = {} as boolean;
-
+  aGameDate!:string;
 
   constructor(
     public loginService:LoginService,
@@ -66,7 +66,10 @@ export class GameDetailsPageComponent implements OnInit {
     this.igdb.GetGameByID(Number(this.route.snapshot.paramMap.get('id')?.substring(1))) //Number(this.route.snapshot.paramMap.get('id'))
       .subscribe(returnData => {
         this.gameResults = new GameDetails(returnData[0].id, returnData[0].first_release_date, returnData[0].name, returnData[0].rating, returnData[0].summary, returnData[0].url);
-        
+        this.aGameDate = new Date(this.gameResults.releaseDate).toString();
+        console.log("returned release date: " + this.gameResults.releaseDate);
+        console.log("constructed release date: " + new Date(this.gameResults.releaseDate));
+        console.log("new string release date: " + this.aGameDate);
 
         //now get the notes from Node.JS server  (and thus mongo) for this gameID and UID
         this.noteService.GetNotesForThisGameAndUser(Number(this.route.snapshot.paramMap.get('id')?.substring(1)), this.loginService.GetMyUID())
@@ -75,10 +78,9 @@ export class GameDetailsPageComponent implements OnInit {
             console.log("return data 2 content: " + returnData2);
 
             this.noteResults = [];
-            this.noteResults.pop();
 
             returnData2.forEach(note => {
-              this.noteResults.push(new Note(returnData2[0].userID, returnData2[0].gameID, returnData2[0].noteID, returnData2[0].dateTime, returnData2[0].noteContent, ));
+              this.noteResults.push(new Note(returnData2[0].userID, returnData2[0].gameID, returnData2[0].noteID, returnData2[0].noteContent, returnData2[0].dateTime  ));
             });
 
             console.log("note results: " + this.noteResults);
@@ -89,6 +91,8 @@ export class GameDetailsPageComponent implements OnInit {
       }   
 
     );
+
+
 
     this.userService.IsGameInMyGames(Number(this.route.snapshot.paramMap.get('id')?.substring(1)), this.loginService.GetMyUID())
       .subscribe(returnData => {
