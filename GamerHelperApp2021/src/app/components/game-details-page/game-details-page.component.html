@@ -1,11 +1,6 @@
-<p>game-details-page works!</p>
+<h5>Game Details Page</h5>
 
-
-
-
-
-
-<div *ngIf="gameResults" class="card align-items-center" style="width: 75rem;">
+<div *ngIf="gameResults" >
 
     <h2>{{gameResults.gameName}}</h2>
 
@@ -28,7 +23,7 @@
     </div>
     
 
-    <div class="card align-items-center" style="width: auto;">
+    <div >
         <span>
             <span *ngIf="isInList"> <button class="btn btn-success"  style="width: 13rem;" routerLink="/noteDetails/:{{gameResults.gameID}}">Add New Note</button> &nbsp; &nbsp; &nbsp; </span>
             
@@ -44,7 +39,7 @@
 
     &nbsp; &nbsp; &nbsp;
 
-    <div *ngIf="isInList" class="card align-items-center" style="width: 50rem;">
+    <div *ngIf="isInList" >
         <h4>My Notes For: {{gameResults.gameName}}</h4>
         <div>
             <ul class="Note" style="width: 50rem;">

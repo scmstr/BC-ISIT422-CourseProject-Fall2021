@@ -14,7 +14,7 @@ import { LoginService } from './services/login.service';
 
 
 export class AppComponent {
-  title = 'GamerHelperApp2021';
+  title = 'Gamer Helper App 2021';
 
   constructor(
     public loginService:LoginService

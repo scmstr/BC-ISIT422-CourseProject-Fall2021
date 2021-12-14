@@ -1,4 +1,4 @@
-<p>my-games-page works!</p>
+<h5>My Games Page</h5>
 
 <div>
     <!-- <app-search-page></app-search-page> -->
@@ -7,13 +7,13 @@
     <br /> <br />
     <ul class="GameDetails">
         <li *ngFor="let aGame of myGames;">
-            <div class="card align-items-center" style="width: 18rem;">
-                <button class="btn btn-link" routerLink="/game/:{{aGame.gameID}}">Game name: {{aGame.gameName}}
+            <div>
+                <button routerLink="/game/:{{aGame.gameID}}">Game name: {{aGame.gameName}}
                     <br />
                     Game ID: {{aGame.gameID}}
                 </button>
                 <br />
-                <button class="btn btn-success"  style="width: 13rem;" routerLink="/noteDetails/:{{aGame.gameID}}">add note</button>
+                <button routerLink="/noteDetails/:{{aGame.gameID}}">add note</button>
                 <br>
                 <!-- <button (click)="updateNote()">Add/Update Note</button> -->
             </div>
