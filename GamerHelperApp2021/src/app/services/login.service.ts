@@ -57,12 +57,8 @@ export class LoginService {
 
 
 
-  //logs in the user and sets the session info - 
+  //logs in the user and sets the session info - WORKS
   LogInThisUser(pUser:string, pPass:string):void {
-
-    ///////////////////////////////
-    /////////DO NOT DELETE/////////
-    ///////////////////////////////
 
     this.VerifyLogin(pUser, pPass)
       .subscribe(returnData => {
@@ -97,40 +93,15 @@ export class LoginService {
       }
     );
 
-
-    //Testing STUB!!!
-    //the above code chunk is the REAL ONE, below here is just for testing before the node/mongo stuff is made
-    // this.loggedIn = true;
-    // this.loggedInUID = Number(pUser);
-    // this.router.navigate(['/home']);
-
-
   }
-  
-  
 
 
-
-  //test auth method
-    //takes in user:pass
-    //sends it to node server                    <------------------node psuedocode starts here
-      //node server gets that user from mongo
-      //compares inputPass to mongoPass
-        //if matches, send back TRUE to angular, which causes UID to save to login service/session data and loggedIn to change to true
-        //if doesnt match, throw error
-  //
-
-
-
-
-  //actual method to query an endpoint (Node) to see if the entered user:pass are valid
+  //actual method to query an endpoint (Node) to see if the entered user - WORKS
   VerifyLogin(pUsername:string, pPassword:string): Observable<LoginData>  {
     console.log("verifying user data....");
     return this.http.get<LoginData>('http://localhost:3000/verifyLogin/' + pUsername + "/" + pPassword);
     //return this.http.get<User>('OTHER ADDRESS/verifyLogin/' + pUsername + "/" + pPassword);
   }
-
-
 
 
   //attempt to create new user here - WORKS
