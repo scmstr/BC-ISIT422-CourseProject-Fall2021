@@ -1,4 +1,4 @@
-<p>search-page works!</p>
+<h5>Search Page</h5>
 
 <label>Search:</label><input type="submit" (keyup.enter)=Search(searchInput) type="text" id="searchInputID" name="searchInput"  [(ngModel)]="searchInput">
 
@@ -8,7 +8,7 @@
 <br /> <br /> <br />
 
 
-<div class="card" style="width: 25rem;" *ngIf="searched">
+<div  *ngIf="searched">
     <br />
     <h2>Results:</h2>
     <br />
@@ -20,14 +20,14 @@
 
     <ul class="GameDetails">
         <li *ngFor="let aGame of gameResults;">
-            <div class="card align-items-center" style="width: 18rem;">
+            <div >
                 <!-- game details -->
-                <button class="btn btn-link" routerLink="/game/:{{aGame.gameID}}">Game Name: {{aGame.gameName}}
+                <button routerLink="/game/:{{aGame.gameID}}">Game Name: {{aGame.gameName}}
                     <br />
                     Game ID: {{aGame.gameID}}
                 </button>
                 <br />
-                <button class="btn btn-primary" style="width: 13rem;"(click)="AddToMyGames(aGame.gameID, aGame.gameName);" >add to my games</button>
+                <button (click)="AddToMyGames(aGame.gameID, aGame.gameName);" >Add To My Games</button>
             </div>
             <br />
         </li>

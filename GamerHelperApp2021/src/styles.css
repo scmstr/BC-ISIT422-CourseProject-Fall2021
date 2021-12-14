@@ -1,1 +1,52 @@
 /* You can add global styles to this file, and also import other style files */
+html,body {
+    height: 100%;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    background: no-repeat;
+    background-color: #E8E8E8;
+    background: -moz-linear-gradient(144deg, rgba(232,232,232,1) 0%, rgba(204,220,232,1) 60%, rgba(155,182,215,1) 100%);
+    background: -webkit-linear-gradient(144deg, rgba(232,232,232,1) 0%, rgba(204,220,232,1) 60%, rgba(155,182,215,1) 100%);
+    background: linear-gradient(144deg, rgba(232,232,232,1) 0%, rgba(204,220,232,1) 60%, rgba(155,182,215,1) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#e8e8e8",endColorstr="#9bb6d7",GradientType=1);
+    background-attachment: fixed;
+}
+
+body {
+    text-align: center;
+    margin: 0vh 7vw;
+    font-family: sans-serif;
+    color: #333A56;
+    font-size: 11pt;
+}
+h2,h3 {
+  text-align: center;
+  display: block;
+  color: #F7F5E6;
+  background-color: #52658F;
+  box-shadow: #355b63 3px 3px;
+}
+
+ul {
+  text-align: center;
+  padding: 0;
+}
+li,ul {
+    list-style: none;
+    background-color: #e1f1f5;
+    box-shadow: rgba(0,0,0,0.15) 2px 2px;
+    padding: 0.1em;
+    margin: 0.5em 5em;
+}
+span,GameDetails {
+    display: inline-block;
+    background-color: #e1f1f5;
+    box-shadow: rgba(0,0,0,0.15) 2px 2px;
+    padding: 0.25em;
+    margin: 0.35em 0.5em;
+    font-size: 0.85em;
+}
+
+
