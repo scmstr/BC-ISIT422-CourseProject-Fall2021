@@ -120,15 +120,18 @@ export class LoginService {
   VerifyLogin(pUsername:string, pPassword:string): Observable<LoginData>  {
     console.log("verifying user data....");
     return this.http.get<LoginData>('http://localhost:3000/verifyLogin/' + pUsername + "/" + pPassword);
-    //return this.http.get<User>('OTHER ADDRESS/myGames' + userID);
+    //return this.http.get<User>('OTHER ADDRESS/verifyLogin/' + pUsername + "/" + pPassword);
   }
 
 
 
 
   //attempt to create new user here
-  CreateNewUser() {
-    
+  CreateNewUser(pUsername:string, pPassword:string):Observable<any> {
+    console.log("CreateNewUser ran in login.service and took in this username and password");
+    console.log(pUsername + ":" + pPassword);
+    return this.http.get<any>('http://localhost:3000/createNewUser/' + pUsername + "/" + pPassword);
+    //return this.http.get<User>('OTHER ADDRESS/createNewUser/' + pUsername + "/" + pPassword);
   }
 
 

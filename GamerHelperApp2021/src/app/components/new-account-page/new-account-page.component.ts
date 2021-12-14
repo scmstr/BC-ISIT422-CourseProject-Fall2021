@@ -31,61 +31,137 @@ export class NewAccountPageComponent implements OnInit {
 
 
   //vars
-  newUsernameInput?:string;
-  newPasswordInput?:string;
-  confirmNewPasswordInput?:string;
+  newUsernameInput!:string;
+  newPasswordInput!:string;
+  confirmNewPasswordInput!:string;
+  errorZone:string = "";
+  isError:boolean = false;
+
+
+  //to create a new user - WORKS
+  CreateNewUser(pNewUsernameInput:string, pNewPasswordInput:string, pConfirmNewPasswordInput:string):void {
+    this.errorZone = "";
+    let passMatch = this.DoTheseStringsMatch(pNewPasswordInput, pConfirmNewPasswordInput);
+    let isValidPass = this.IsValidPassword(pNewPasswordInput);
+    let isValidUsername = this.IsValidUsername(pNewUsernameInput);
+    
 
 
 
-  CreateNewUser(pNewUsernameInput?:string, pNewPasswordInput?:string, pConfirmNewPasswordInput?:string):void {
-
-    if (pNewPasswordInput != pConfirmNewPasswordInput) {
+    if (!passMatch) {
       //if passwords dont match, throw error
-      console.log("passwords dont match");
+      this.isError = true;
+      this.errorZone += "\n\nPasswords dont match.";
+    }
+
+    if (!isValidUsername) {
+      this.isError = true;
+      this.errorZone += "\n\nUsername is invalid. Username must be at least 4 characters long.";
+    }
+
+    if (!isValidPass) {
+      this.isError = true;
+      this.errorZone += "\n\nPassword is invalid. Password must be at least 4 characters long.";
     }
 
 
 
+    //if everything is good to go - try to create a new user
+    if (isValidPass && isValidUsername && passMatch) {
+      //success
+      this.loginService.CreateNewUser(pNewUsernameInput, pNewPasswordInput)
+        .subscribe(returnData => {
+          console.log("create new user ran in component");
 
-    //read data from page
-    //make sure input is valid (not blank, ?username is an email?, ?pass at least 6 chars?)
-      //if not valid, throw error notification
-      //if valid...
-        //send it to node
-          //node checks to see if it exists
-            //if not, make a new user out of this
-            //if already exists, send back error
-      //
-    //get back node stuff
-      //if new user created, send back to login page
-      //if user already exists, stay on page and throw error notification
-    //
+          if (returnData.message == "Successfully created new user!") {
+            window.alert(returnData.message);
+            console.log("seems to have succeeded? return data: ");
+            console.log(returnData.message);
+            this.router.navigate(['home']);
+          }
+          else
+          {
+            console.log("seems to have failed? return data: ");
+            console.log(returnData.message);
+            window.alert(returnData.message);
+          }
 
-
-    if ((this.IsValidUsername(pNewUsernameInput)) && (this.IsValidPassword(pNewPasswordInput)) && (pNewPasswordInput === pConfirmNewPasswordInput)) {
-
-
-      console.log("create new user SUCCESS");
-      this.router.navigate(['/login']);
+      
+        }
+      );
     }
-    else {
 
-      console.log("create new user FAILED");
+
+  }
+  
+
+  //tests for valid username - WORKS (but uses stubs --> missing: regex for email and sanitize: IsValidPassword and IsEmailFormat)
+  IsValidUsername(pUsernameInput:string):boolean {
+    //username needs to be a valid email. try regular expressions. regex
+    let isUndefinedOrNull = true;
+    let isTooShort = true;
+    let isInvalidCharacters = true;
+    
+
+    
+    if (pUsernameInput != undefined && pUsernameInput != null) {  //this just makes it so reading legnth doesnt break
+      isUndefinedOrNull = false;
     }
+
+    if (pUsernameInput.length > 3) {
+      isTooShort = false;
+    }
+
+    if (this.IsEmailFormat(pUsernameInput))
+    {
+      isInvalidCharacters = false;
+    }
+
+
+
+    if(!isTooShort && !isInvalidCharacters && !isUndefinedOrNull) {
+      return true;
+    }
+    else
+    {
+      return false;
+    }
+  }
+
+
+  //tests for valid password - STUB
+  IsValidPassword(pPasswordInput:string):boolean {
+
+    if (true) { //put test here for stripping password of usable code - using regex expression
+      if (pPasswordInput.length > 3) {
+        return true;
+      }
+      else {
+        return false;
+      }
+    }    
 
   }
 
 
-  IsValidUsername(pUsernameInput?:string):boolean {
-    //username needs to be a valid email. try regular expressions. regex
-
-    
-    if (pUsernameInput == undefined) {  //this just makes it so reading legnth doesnt break
-      pUsernameInput = "";
-      console.log("username set to blank");
+  //compare and match strings - WORKS
+  DoTheseStringsMatch(pString1:string, pString2:string):boolean {
+    if (pString1===pString2) {
+      return true;
     }
+    else
+    {
+      return false;
+    }
+  }
+  
 
-    if (pUsernameInput.length > 0) {
+  //tests for valid email - STUB
+  IsEmailFormat(pInputEmail:string):boolean {
+    
+    //need this to test for regex email type in the future.
+    if(true) //   pInputEmail.match((/^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/)))
+    {
       return true;
     }
     else
@@ -93,37 +169,8 @@ export class NewAccountPageComponent implements OnInit {
       return false;
     }
 
+
   }
-
-
-  IsValidPassword(pPasswordInput?:string):boolean {
-    //password needs to be valid password, too. use regular expressions. regex
-
-    // if (pPasswordInput !=undefined) {
-      
-    // }
-
-    return true;
-  }
-
-
-  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

@@ -1,10 +1,13 @@
 <p>my-games-page works!</p>
 
 <div>
-    <!-- <app-search-page></app-search-page> -->
-    <!-- add new game button here -->
+    
+    <div class="card align-items-center" style="width: 18rem;">
+        <button class="btn btn-primary"  style="width: 13rem;" routerLink="/search/">Add New Game</button>
+    </div>
     
     <br /> <br />
+    
     <ul class="GameDetails">
         <li *ngFor="let aGame of myGames;">
             <div class="card align-items-center" style="width: 18rem;">
@@ -13,7 +16,7 @@
                     Game ID: {{aGame.gameID}}
                 </button>
                 <br />
-                <button class="btn btn-success"  style="width: 13rem;" routerLink="/noteDetails/:{{aGame.gameID}}">add note</button>
+                <button class="btn btn-success"  style="width: 13rem;" routerLink="/noteDetails/:{{aGame.gameID}}/:{{aGame.gameName}}">add note</button>
                 <br>
                 <!-- <button (click)="updateNote()">Add/Update Note</button> -->
             </div>

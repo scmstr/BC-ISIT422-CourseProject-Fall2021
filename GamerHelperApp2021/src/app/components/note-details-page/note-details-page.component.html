@@ -1,7 +1,7 @@
 <p>note-details-page works!</p>
 
 <div class="card"style="width: 40rem;">
-    <h2>new note for X game</h2>
+    <h2>New Note for: {{gameName}}</h2>
     <textarea [(ngModel)]="noteContentInput"></textarea>
     <button  (click)=SaveNote(noteContentInput) class="btn btn-success">save note</button>
 </div>

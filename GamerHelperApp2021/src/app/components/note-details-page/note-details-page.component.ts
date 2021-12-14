@@ -30,21 +30,32 @@ export class NoteDetailsPageComponent implements OnInit {
   }    
 
 
+  //variables
+  gameName = this.route.snapshot.paramMap.get('gameName')?.substring(1);
+  gameID = Number(this.route.snapshot.paramMap.get('gameID')?.substring(1));
+
+
+
   ngOnInit(): void {
     if (!this.loginService.IsLoggedIn())
-      {
-        this.loginService.Logout();
-      }
+    {
+      this.loginService.Logout();
+    }
+
+
+
+
+
   }
 
 
   SaveNote(pNoteContent:string) {
-    
+
 
   }
 
 
 
-  
+  //Number(this.route.snapshot.paramMap.get('id')?.substring(1))
 
 }

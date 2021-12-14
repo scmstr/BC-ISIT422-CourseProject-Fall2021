@@ -13,4 +13,11 @@ make new account here!
 <br/><br/>
 <button (click)=CreateNewUser(newUsernameInput,newPasswordInput,confirmNewPasswordInput)>Submit!</button>
 
+<div class="card align-items-center" style="width: 35rem;" *ngIf="isError">
+    <div>
+         <!-- error messages here -->
+        <strong>{{errorZone}}</strong>
+    </div>
+</div>
+
 
