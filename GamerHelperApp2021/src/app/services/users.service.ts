@@ -39,6 +39,7 @@ export class UsersService {
   GetMyUsername():Observable<any> {
     if (this.loginService.IsLoggedIn()) {
       return this.http.get<any[]>('http://localhost:3000/getMyUsername/' + this.loginService.GetMyUID());
+      //return this.http.get<any[]>('https://isit422nodeserver.azurewebsites.net/getMyUsername/' + this.loginService.GetMyUID());
     }
     else
     {
@@ -52,7 +53,7 @@ export class UsersService {
   GetMyGames(userID:number): Observable<any[]> {
     console.log("getmygames service ran");
     return this.http.get<any[]>('http://localhost:3000/getMyGames/' + userID);
-    //return this.http.get<User>('OTHER ADDRESS/myGames' + userID);
+    //return this.http.get<any[]>('https://isit422nodeserver.azurewebsites.net/myGames' + userID);
   }
 
 
@@ -60,6 +61,7 @@ export class UsersService {
   AddGame(pUserID: number, pGameID:number, pGameName:string): Observable<any> {
     console.log("add game method in user.service just ran.");
     return this.http.get<any>('http://localhost:3000/addGame/' + pUserID + "/" + pGameID + "/" + pGameName);
+    //return this.http.get<any>('https://isit422nodeserver.azurewebsites.net/addGame/' + pUserID + "/" + pGameID + "/" + pGameName);
   }
 
 
@@ -67,6 +69,7 @@ export class UsersService {
   DeleteGame(pUserID: number, pGameID: number): Observable<any> {
     console.log("delete game service ran");
     return this.http.get<any>('http://localhost:3000/deleteGame/' + pUserID + "/" + pGameID);
+    //return this.http.get<any>('https://isit422nodeserver.azurewebsites.net/deleteGame/' + pUserID + "/" + pGameID);
   }
 
 
@@ -74,16 +77,9 @@ export class UsersService {
   IsGameInMyGames(pGameID:number, pUserID:number):Observable<any> {
     console.log("IsGameInMyList in user.service ran.");
     return this.http.get<any>('http://localhost:3000/isGameInMyGames/' + pGameID + "/" + pUserID);
+    //return this.http.get<any>('https://isit422nodeserver.azurewebsites.net/isGameInMyGames/' + pGameID + "/" + pUserID);
   }
- 
-
-
-
-
-
-
-
-
+  
 }
 
 
