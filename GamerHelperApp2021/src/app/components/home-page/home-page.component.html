@@ -7,6 +7,25 @@
 </h3>
 
 
-<!-- show latest 3 notes here -->
+<div>
+    <div *ngIf="loaded" >
+        <h4>Last Three Notes:</h4>
+        <div>
+            <ul>
+                 <li *ngFor="let aNote of latestThreeNotes;">
+                    <div>
+                        {{aNote.noteDate | date:'full'}}
+                        <br />
+                        <div>
+                            {{aNote.noteContent}}
+                        </div>
+                    </div>
+
+                </li>
+            </ul>
+        </div>
+
+    </div>
+</div>
 
 

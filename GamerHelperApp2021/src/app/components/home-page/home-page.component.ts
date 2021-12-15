@@ -11,6 +11,8 @@ import { Router } from '@angular/router';
 import { IGDBAPIService } from 'src/app/services/igdbapi.service';
 import { GameDetails } from 'src/app/objectClasses/game-details';
 import { UsersService } from 'src/app/services/users.service';
+import { NotesService } from 'src/app/services/notes.service';
+import { Note } from 'src/app/objectClasses/note';
 
 @Component({
   selector: 'app-home-page',
@@ -20,6 +22,9 @@ import { UsersService } from 'src/app/services/users.service';
 export class HomePageComponent implements OnInit {
 
   username: string = {} as string;
+  loaded: boolean = {} as boolean;
+  latestThreeNotes: any[] = {} as any[];
+  aGame: GameDetails = {} as GameDetails;
 
 
   constructor(
@@ -29,6 +34,7 @@ export class HomePageComponent implements OnInit {
     private router: Router,
     public igdb: IGDBAPIService,
     public userService: UsersService,
+    public noteService: NotesService,
     ) 
     {
       if (!this.loginService.IsLoggedIn()) 
@@ -45,18 +51,24 @@ export class HomePageComponent implements OnInit {
   }
 
 
-
-
-  aGame: GameDetails = {} as GameDetails;
+  
 
   ngOnInit(): void {
     this.username = ""; //blanks the username 
     if (!this.loginService.IsLoggedIn())
     {
       this.loginService.Logout();
-
     }  
 
+    this.LoadUsername();
+    this.LoadLastThreeNotes();
+
+  }
+
+
+
+  //WORKS
+  LoadUsername():void {
     this.userService.GetMyUsername()
       .subscribe(returnData => {
         this.username = returnData;
@@ -65,23 +77,20 @@ export class HomePageComponent implements OnInit {
         console.log(returnData)
       }
     );
-
-    
-
-
-
-
-
-
   }
 
+  //WORKS
+  LoadLastThreeNotes():void {
+    this.noteService.GetLastThreeNotesForUser()
+      .subscribe(returnData => {
+        console.log("returnData: ")
+        console.log(returnData);
+        this.loaded = true;
+        this.latestThreeNotes = returnData;
+      }
+    )
 
-
-  
-  
-  
-
-
+  }
   
 
 

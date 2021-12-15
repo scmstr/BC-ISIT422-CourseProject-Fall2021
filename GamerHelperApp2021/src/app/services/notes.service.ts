@@ -31,96 +31,34 @@ export class NotesService {
   }
 
 
-
-
-  GetNote(gameID: number) {
-    return this.http.get<Note>('http://localhost:3000/myGames/' + gameID)
-  }
-
-
-  DeleteNote(gameID: number): Observable<Message> {
-    return this.http.delete<Message>('http://localhost:3000/myGames/'+ gameID);
-  }
-
-
-  AddNote(newNote: Note):Observable<Note> {
-    return this.http.post<Note>('http://localhost:3000/addNote/', newNote);
-  }
-
-  UpdateNote(gameID: number, oneNote: Note) : Observable<Note>{
-    return this.http.put<Note>('http://localhost:3000/myGames/' + gameID, oneNote)
-  }
-
-
-
-  getNotes(): Observable<Note[]> {
-    return this.http.get<Note[]>('http://localhost:3000/myGames/' + sessionStorage.getItem('gameID'))
-  }
-
-
-  
-
-
-
-
+  //NEW note - WORKS
   CreateNewNote(pGameID:string, pNoteContent:string):Observable<any> {
     return this.http.get<any>('http://localhost:3000/createNote/' + pGameID + "/" + this.loginService.GetMyUID() + "/" + pNoteContent);
   }
 
-  
+
+  //GET ALL notes - WORKS
   GetNotesForThisGameAndUser(pGameID:number, pUserID:number):Observable<any[]> {
-    return this.http.get<any[]>('http://localhost:3000/notesForThisGameAndUser/' + pGameID + "/" + pUserID)
+    return this.http.get<any[]>('http://localhost:3000/getNotesForThisGameAndUser/' + pGameID + "/" + pUserID)
   }
 
 
-  
-  ////in node...
-
-  // app.get('/fruit/:fruitName/:fruitColor', function(req, res) {
-  //   var data = {
-  //     "fruit": {
-  //       "apple": req.params.fruitName,
-  //       "color": req.params.fruitColor
-  //     }
-  //   }; 
-
-
-  //   //do your mongo pulldown stuff here
-  //     //get ALL notes ...or -> (mongo should be smart, you may be able to just say "get all notes that have both desired UID and gameID")
-  //     //go through every note with FOR, and check if UID matches on that note
-  //       //if FK UID matches, check to see if pGameID matches
-  //         //if those match, add that note to an array of notes
-  //       //
-  //     //
-  //   //send.json(tempArrayOfNotes)
-
-  //   send.json(data);
-  // });
-
-
-  //query node for this user's notes, filter by most recent 3 (need timestamps to work on note objects)
-
-
-  GetLastThreeNotesForUser() {
-
+  //GET LAST THREE notes - WORKS
+  GetLastThreeNotesForUser():Observable<any[]> {
+    return this.http.get<any[]>('http://localhost:3000/getLastThreeNotesForUser/' + this.loginService.GetMyUID())
   }
 
 
-
+  //Sorts notes chronologically - WORKS
   NoteSorter( a:Note, b:Note ) {
     if ( a.dateTime < b.dateTime ){
-      return -1;
+      return 1;
     }
     if ( a.dateTime > b.dateTime ){
-      return 1;
+      return -1;
     }
     return 0;
   }
-
-
-
-
-
 
 
 
