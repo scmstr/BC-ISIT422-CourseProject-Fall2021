@@ -34,18 +34,21 @@ export class NotesService {
   //NEW note - WORKS
   CreateNewNote(pGameID:string, pNoteContent:string):Observable<any> {
     return this.http.get<any>('http://localhost:3000/createNote/' + pGameID + "/" + this.loginService.GetMyUID() + "/" + pNoteContent);
+    //return this.http.get<any>('https://isit422nodeserver.azurewebsites.net/createNote/' + pGameID + "/" + this.loginService.GetMyUID() + "/" + pNoteContent);
   }
 
 
   //GET ALL notes - WORKS
   GetNotesForThisGameAndUser(pGameID:number, pUserID:number):Observable<any[]> {
     return this.http.get<any[]>('http://localhost:3000/getNotesForThisGameAndUser/' + pGameID + "/" + pUserID)
+    //return this.http.get<any[]>('https://isit422nodeserver.azurewebsites.net/getNotesForThisGameAndUser/' + pGameID + "/" + pUserID)
   }
 
 
   //GET LAST THREE notes - WORKS
   GetLastThreeNotesForUser():Observable<any[]> {
     return this.http.get<any[]>('http://localhost:3000/getLastThreeNotesForUser/' + this.loginService.GetMyUID())
+    //return this.http.get<any[]>('https://isit422nodeserver.azurewebsites.net/getLastThreeNotesForUser/' + this.loginService.GetMyUID())
   }
 
 
